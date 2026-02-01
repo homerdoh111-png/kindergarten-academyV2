@@ -1,0 +1,449 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 560" width="400" height="560">
+  <defs>
+
+    <!-- ========================================================= -->
+    <!-- CORE FUR GRADIENTS — color-picked from reference image     -->
+    <!-- ========================================================= -->
+    <radialGradient id="headGrad" cx="38%" cy="28%" r="64%">
+      <stop offset="0%"  stop-color="#F2C470"/>
+      <stop offset="14%" stop-color="#E8A855"/>
+      <stop offset="32%" stop-color="#D48E42"/>
+      <stop offset="52%" stop-color="#B87438"/>
+      <stop offset="74%" stop-color="#8B5A2B"/>
+      <stop offset="100%" stop-color="#5C3518"/>
+    </radialGradient>
+
+    <radialGradient id="bodyGrad" cx="42%" cy="28%" r="64%">
+      <stop offset="0%"  stop-color="#ECA850"/>
+      <stop offset="16%" stop-color="#D89840"/>
+      <stop offset="40%" stop-color="#C08038"/>
+      <stop offset="62%" stop-color="#956530"/>
+      <stop offset="84%" stop-color="#6B4420"/>
+      <stop offset="100%" stop-color="#4A2E14"/>
+    </radialGradient>
+
+    <radialGradient id="limbGrad" cx="40%" cy="32%" r="60%">
+      <stop offset="0%"  stop-color="#DCA055"/>
+      <stop offset="28%" stop-color="#C08540"/>
+      <stop offset="58%" stop-color="#946830"/>
+      <stop offset="100%" stop-color="#5C3518"/>
+    </radialGradient>
+
+    <!-- ========================================================= -->
+    <!-- BELLY — creamy peach, warm undertone throughout            -->
+    <!-- ========================================================= -->
+    <radialGradient id="bellyGrad" cx="50%" cy="34%" r="56%">
+      <stop offset="0%"  stop-color="#FFF0D8"/>
+      <stop offset="28%" stop-color="#F5DFC0"/>
+      <stop offset="56%" stop-color="#E8C898"/>
+      <stop offset="100%" stop-color="#D0A878"/>
+    </radialGradient>
+
+    <!-- ========================================================= -->
+    <!-- PAW PADS — dark charcoal brown, glossy                    -->
+    <!-- ========================================================= -->
+    <radialGradient id="pawPad" cx="42%" cy="34%" r="58%">
+      <stop offset="0%"  stop-color="#4A3525"/>
+      <stop offset="50%" stop-color="#342518"/>
+      <stop offset="100%" stop-color="#221810"/>
+    </radialGradient>
+
+    <!-- ========================================================= -->
+    <!-- EAR INNER — warm peach, subsurface-scatter glow           -->
+    <!-- ========================================================= -->
+    <radialGradient id="earInner" cx="46%" cy="38%" r="56%">
+      <stop offset="0%"  stop-color="#F0C8A8"/>
+      <stop offset="42%" stop-color="#E8A888"/>
+      <stop offset="100%" stop-color="#C88068"/>
+    </radialGradient>
+
+    <!-- ========================================================= -->
+    <!-- SNOUT — cream muzzle patch                                -->
+    <!-- ========================================================= -->
+    <radialGradient id="snoutGrad" cx="50%" cy="30%" r="58%">
+      <stop offset="0%"  stop-color="#FFF0D8"/>
+      <stop offset="34%" stop-color="#F0DCC8"/>
+      <stop offset="66%" stop-color="#DEC8A8"/>
+      <stop offset="100%" stop-color="#C8A880"/>
+    </radialGradient>
+
+    <!-- ========================================================= -->
+    <!-- NOSE — dark charcoal, slightly glossy                     -->
+    <!-- ========================================================= -->
+    <radialGradient id="noseGrad" cx="38%" cy="30%" r="64%">
+      <stop offset="0%"  stop-color="#4A3828"/>
+      <stop offset="42%" stop-color="#322018"/>
+      <stop offset="100%" stop-color="#1E1410"/>
+    </radialGradient>
+
+    <!-- ========================================================= -->
+    <!-- EYES — warm amber-gold iris, Pixar wet look               -->
+    <!-- ========================================================= -->
+    <radialGradient id="sclera" cx="44%" cy="40%" r="56%">
+      <stop offset="0%"  stop-color="#FFFFFF"/>
+      <stop offset="70%" stop-color="#FEFDF8"/>
+      <stop offset="100%" stop-color="#E8E4DC"/>
+    </radialGradient>
+
+    <!-- Iris: saturated amber-gold (color-picked from reference) -->
+    <radialGradient id="irisGrad" cx="36%" cy="32%" r="58%">
+      <stop offset="0%"  stop-color="#E8A830"/>
+      <stop offset="20%" stop-color="#C8882A"/>
+      <stop offset="46%" stop-color="#A06820"/>
+      <stop offset="70%" stop-color="#704818"/>
+      <stop offset="100%" stop-color="#3A2810"/>
+    </radialGradient>
+
+    <!-- Iris rim catch-light ring -->
+    <radialGradient id="irisRim" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"  stop-color="transparent"/>
+      <stop offset="64%" stop-color="transparent"/>
+      <stop offset="80%" stop-color="#E8C050" stop-opacity="0.38"/>
+      <stop offset="100%" stop-color="#C89840" stop-opacity="0.18"/>
+    </radialGradient>
+
+    <!-- Primary eye highlight — WARM white (Pixar never uses pure white) -->
+    <radialGradient id="hiLarge" cx="26%" cy="24%" r="52%">
+      <stop offset="0%"  stop-color="#FFF8E8" stop-opacity="1"/>
+      <stop offset="36%" stop-color="#FFF0D0" stop-opacity="0.82"/>
+      <stop offset="100%" stop-color="#FFF0D0" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- ========================================================= -->
+    <!-- SCARF — coral-red bandana (the key character accent)      -->
+    <!-- ========================================================= -->
+    <linearGradient id="scarfMain" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"  stop-color="#E85050"/>
+      <stop offset="38%" stop-color="#D84040"/>
+      <stop offset="100%" stop-color="#C03030"/>
+    </linearGradient>
+    <linearGradient id="scarfFold" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#A82828"/>
+      <stop offset="100%" stop-color="#882020"/>
+    </linearGradient>
+
+    <!-- ========================================================= -->
+    <!-- LIGHTING OVERLAYS                                         -->
+    <!-- ========================================================= -->
+    <!-- Head specular — warm golden, not white -->
+    <radialGradient id="headSpec" cx="36%" cy="25%" r="40%">
+      <stop offset="0%"  stop-color="#FFF0C8" stop-opacity="0.44"/>
+      <stop offset="36%" stop-color="#FFE8A8" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#FFE8A8" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Body specular -->
+    <radialGradient id="bodySpec" cx="38%" cy="22%" r="42%">
+      <stop offset="0%"  stop-color="#FFF0C8" stop-opacity="0.24"/>
+      <stop offset="44%" stop-color="#FFE8A8" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#FFE8A8" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Rim light — warm amber from right -->
+    <linearGradient id="rimLight" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"  stop-color="transparent"/>
+      <stop offset="74%" stop-color="transparent"/>
+      <stop offset="100%" stop-color="#E8C060" stop-opacity="0.22"/>
+    </linearGradient>
+
+    <!-- Ground bounce — warm golden uplighting on lower body -->
+    <linearGradient id="groundBounce" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"  stop-color="transparent"/>
+      <stop offset="68%" stop-color="transparent"/>
+      <stop offset="100%" stop-color="#E8C060" stop-opacity="0.2"/>
+    </linearGradient>
+
+    <!-- ========================================================= -->
+    <!-- FILTERS                                                   -->
+    <!-- ========================================================= -->
+    <filter id="shadow" x="-30%" y="-20%" width="160%" height="160%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="5"/>
+      <feOffset dx="0" dy="5"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.2"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <filter id="softShadow" x="-40%" y="-30%" width="180%" height="180%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="7"/>
+      <feOffset dx="0" dy="5"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.17"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <!-- Feather blurs for fur-zone edge transitions -->
+    <filter id="feather" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="9"/>
+    </filter>
+    <filter id="featherSm" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4.5"/>
+    </filter>
+
+    <!-- ========================================================= -->
+    <!-- ANIMATIONS                                                -->
+    <!-- ========================================================= -->
+    <style>
+      @keyframes sparkle { 0%,100%{opacity:1} 50%{opacity:0.22} }
+      .sp-a { animation: sparkle 3.2s ease-in-out infinite; }
+      .sp-b { animation: sparkle 3.2s ease-in-out infinite 1.6s; }
+    </style>
+  </defs>
+
+  <!-- ============================================================ -->
+  <!-- TAIL — volumetric curl to right                              -->
+  <!-- ============================================================ -->
+  <g filter="url(#shadow)">
+    <!-- Shadow side -->
+    <path d="M 252 416 Q 300 430 318 394 Q 334 352 306 330 Q 280 316 266 338" fill="#4E3418"/>
+    <!-- Lit side -->
+    <path d="M 250 419 Q 296 434 314 396 Q 328 354 302 334 Q 278 320 264 342" fill="url(#limbGrad)"/>
+    <!-- Top highlight stripe -->
+    <path d="M 252 416 Q 292 428 310 393 Q 322 358 300 340" fill="none" stroke="#E8C060" stroke-width="4.5" stroke-linecap="round" opacity="0.24"/>
+    <!-- Tip -->
+    <ellipse cx="266" cy="343" rx="10" ry="12" fill="#4E3418" transform="rotate(-20 266 343)"/>
+    <ellipse cx="263" cy="339" rx="3.5" ry="4.5" fill="#7A5828" opacity="0.34" transform="rotate(-20 263 339)"/>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- LEGS — short, stubby, tapered                                -->
+  <!-- ============================================================ -->
+  <g filter="url(#shadow)">
+    <!-- Left leg -->
+    <path d="M 139 420 Q 136 460 138 492 L 182 492 Q 184 460 182 420 Q 168 416 139 420 Z" fill="url(#limbGrad)"/>
+    <ellipse cx="160" cy="422" rx="16" ry="6" fill="#4A2E16" opacity="0.17"/>
+    <!-- Left paw + dark pad -->
+    <ellipse cx="160" cy="506" rx="32" ry="14" fill="url(#limbGrad)"/>
+    <ellipse cx="160" cy="508" rx="28" ry="11" fill="url(#pawPad)"/>
+    <!-- Toe pads -->
+    <ellipse cx="144" cy="506" rx="5.5" ry="4" fill="#2A1810" opacity="0.48"/>
+    <ellipse cx="155" cy="508" rx="5.5" ry="4" fill="#2A1810" opacity="0.48"/>
+    <ellipse cx="166" cy="508" rx="5.5" ry="4" fill="#2A1810" opacity="0.48"/>
+    <ellipse cx="176" cy="506" rx="5" ry="3.5" fill="#2A1810" opacity="0.42"/>
+    <!-- Pad centre highlight -->
+    <ellipse cx="159" cy="505" rx="8" ry="4.5" fill="#5A4530" opacity="0.28"/>
+
+    <!-- Right leg -->
+    <path d="M 218 420 Q 216 460 218 492 L 264 492 Q 264 460 260 420 Q 246 416 218 420 Z" fill="url(#limbGrad)"/>
+    <ellipse cx="240" cy="422" rx="16" ry="6" fill="#4A2E16" opacity="0.17"/>
+    <!-- Right paw + dark pad -->
+    <ellipse cx="240" cy="506" rx="32" ry="14" fill="url(#limbGrad)"/>
+    <ellipse cx="240" cy="508" rx="28" ry="11" fill="url(#pawPad)"/>
+    <ellipse cx="224" cy="506" rx="5.5" ry="4" fill="#2A1810" opacity="0.48"/>
+    <ellipse cx="235" cy="508" rx="5.5" ry="4" fill="#2A1810" opacity="0.48"/>
+    <ellipse cx="246" cy="508" rx="5.5" ry="4" fill="#2A1810" opacity="0.48"/>
+    <ellipse cx="256" cy="506" rx="5" ry="3.5" fill="#2A1810" opacity="0.42"/>
+    <ellipse cx="239" cy="505" rx="8" ry="4.5" fill="#5A4530" opacity="0.28"/>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- BODY — barrel shaped, wider at hips                          -->
+  <!-- ============================================================ -->
+  <g>
+    <ellipse cx="200" cy="364" rx="82" ry="100" fill="url(#bodyGrad)" filter="url(#shadow)"/>
+    <!-- Side contour shadow ring -->
+    <ellipse cx="200" cy="364" rx="82" ry="100" fill="none" stroke="#4A2E14" stroke-width="26" opacity="0.07"/>
+    <!-- Lighting layers -->
+    <ellipse cx="200" cy="364" rx="82" ry="100" fill="url(#rimLight)"/>
+    <ellipse cx="200" cy="364" rx="82" ry="100" fill="url(#bodySpec)"/>
+    <ellipse cx="200" cy="364" rx="82" ry="100" fill="url(#groundBounce)"/>
+
+    <!-- Under-chin shadow (anchors head) -->
+    <ellipse cx="200" cy="276" rx="50" ry="16" fill="#3A2210" opacity="0.24"/>
+    <!-- Neck crease -->
+    <path d="M 174 282 Q 200 288 226 282" fill="none" stroke="#4A2E14" stroke-width="2.5" opacity="0.17" stroke-linecap="round"/>
+    <!-- Shoulder shadows -->
+    <path d="M 133 316 Q 147 301 165 312" fill="none" stroke="#4A2E14" stroke-width="4.5" opacity="0.09" stroke-linecap="round"/>
+    <path d="M 267 316 Q 253 301 235 312" fill="none" stroke="#4A2E14" stroke-width="4.5" opacity="0.09" stroke-linecap="round"/>
+
+    <!-- Chest fur tuft -->
+    <ellipse cx="200" cy="300" rx="20" ry="16" fill="#E8D0B0" opacity="0.46" filter="url(#featherSm)"/>
+    <ellipse cx="200" cy="298" rx="10" ry="8" fill="#FFF0D8" opacity="0.34"/>
+
+    <!-- Belly — feathered outer glow blends edge into fur -->
+    <ellipse cx="200" cy="380" rx="54" ry="68" fill="#E8D0B0" opacity="0.38" filter="url(#feather)"/>
+    <!-- Belly main patch -->
+    <ellipse cx="200" cy="380" rx="44" ry="58" fill="url(#bellyGrad)"/>
+    <!-- Belly top highlight -->
+    <ellipse cx="197" cy="356" rx="26" ry="32" fill="#FFF8E8" opacity="0.15"/>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- SCARF — coral red bandana with fold                          -->
+  <!-- ============================================================ -->
+  <g filter="url(#shadow)">
+    <!-- Main band across neck -->
+    <path d="M 148 280 Q 200 274 252 280 Q 248 294 200 292 Q 152 294 148 280 Z" fill="url(#scarfMain)"/>
+    <!-- Knot centre -->
+    <ellipse cx="200" cy="285" rx="10" ry="7" fill="#C03030"/>
+    <!-- Triangular front drape -->
+    <path d="M 188 290 L 200 334 L 212 290 Q 200 294 188 290 Z" fill="url(#scarfMain)"/>
+    <!-- Fold shadow line down centre of triangle -->
+    <path d="M 196 294 L 200 334 L 204 294 Q 200 296 196 294 Z" fill="url(#scarfFold)" opacity="0.38"/>
+    <!-- Top-band highlight -->
+    <path d="M 158 278 Q 200 273 242 278" fill="none" stroke="#F06060" stroke-width="1.8" opacity="0.38" stroke-linecap="round"/>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- ARMS                                                         -->
+  <!-- ============================================================ -->
+  <g>
+    <!-- Left arm — relaxed at side -->
+    <g filter="url(#shadow)">
+      <ellipse cx="124" cy="332" rx="24" ry="54" fill="url(#limbGrad)" transform="rotate(-14 124 332)"/>
+      <!-- Left paw -->
+      <ellipse cx="112" cy="390" rx="20" ry="13" fill="url(#limbGrad)" transform="rotate(-14 112 390)"/>
+      <ellipse cx="112" cy="392" rx="17" ry="10" fill="url(#pawPad)" transform="rotate(-14 112 392)"/>
+      <ellipse cx="102" cy="390" rx="4" ry="3" fill="#2A1810" opacity="0.44" transform="rotate(-14 112 390)"/>
+      <ellipse cx="110" cy="392" rx="4" ry="3" fill="#2A1810" opacity="0.44" transform="rotate(-14 112 390)"/>
+      <ellipse cx="118" cy="392" rx="4" ry="3" fill="#2A1810" opacity="0.44" transform="rotate(-14 112 390)"/>
+    </g>
+
+    <!-- Right arm — raised in WAVE, fingers spread -->
+    <g filter="url(#shadow)">
+      <ellipse cx="278" cy="312" rx="24" ry="52" fill="url(#limbGrad)" transform="rotate(30 278 312)"/>
+      <!-- Waving paw -->
+      <ellipse cx="297" cy="272" rx="22" ry="16" fill="url(#limbGrad)" transform="rotate(30 297 272)"/>
+      <ellipse cx="297" cy="274" rx="18" ry="12" fill="url(#pawPad)" transform="rotate(30 297 274)"/>
+      <!-- Spread toe pads -->
+      <ellipse cx="284" cy="268" rx="4.2" ry="3.5" fill="#2A1810" opacity="0.44" transform="rotate(30 297 272)"/>
+      <ellipse cx="293" cy="266" rx="4.2" ry="3.5" fill="#2A1810" opacity="0.44" transform="rotate(30 297 272)"/>
+      <ellipse cx="302" cy="267" rx="4.2" ry="3.5" fill="#2A1810" opacity="0.44" transform="rotate(30 297 272)"/>
+      <ellipse cx="309" cy="271" rx="3.6" ry="3" fill="#2A1810" opacity="0.38" transform="rotate(30 297 272)"/>
+    </g>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- HEAD                                                         -->
+  <!-- ============================================================ -->
+  <g filter="url(#softShadow)">
+
+    <!-- Head base -->
+    <circle cx="200" cy="158" r="98" fill="url(#headGrad)"/>
+
+    <!-- ===== EARS ===== -->
+    <!-- Left ear -->
+    <ellipse cx="130" cy="80" rx="30" ry="45" fill="url(#limbGrad)" transform="rotate(-13 130 80)"/>
+    <!-- Ear rim fur (dark fluffy edge) -->
+    <ellipse cx="130" cy="76" rx="30" ry="45" fill="#5C3518" opacity="0.22" filter="url(#featherSm)" transform="rotate(-13 130 76)"/>
+    <!-- Inner ear — peach with subsurface scatter -->
+    <ellipse cx="130" cy="84" rx="17" ry="29" fill="url(#earInner)" transform="rotate(-13 130 84)"/>
+    <!-- Subsurface light bleed -->
+    <ellipse cx="128" cy="78" rx="7" ry="12" fill="#F0D0B8" opacity="0.34" transform="rotate(-13 128 78)"/>
+
+    <!-- Right ear -->
+    <ellipse cx="270" cy="80" rx="30" ry="45" fill="url(#limbGrad)" transform="rotate(13 270 80)"/>
+    <ellipse cx="270" cy="76" rx="30" ry="45" fill="#5C3518" opacity="0.22" filter="url(#featherSm)" transform="rotate(13 270 76)"/>
+    <ellipse cx="270" cy="84" rx="17" ry="29" fill="url(#earInner)" transform="rotate(13 270 84)"/>
+    <ellipse cx="272" cy="78" rx="7" ry="12" fill="#F0D0B8" opacity="0.34" transform="rotate(13 272 78)"/>
+
+    <!-- Head specular + rim -->
+    <circle cx="200" cy="158" r="98" fill="url(#headSpec)"/>
+    <circle cx="200" cy="158" r="98" fill="url(#rimLight)"/>
+
+    <!-- ===== FUR COLOR ZONES ===== -->
+    <!-- Dark forehead zone -->
+    <ellipse cx="200" cy="112" rx="58" ry="34" fill="#6B4020" opacity="0.22" filter="url(#featherSm)"/>
+    <!-- Forehead tuft tip-light -->
+    <ellipse cx="200" cy="100" rx="16" ry="7" fill="#F0C060" opacity="0.17" filter="url(#featherSm)"/>
+    <!-- Lighter eye-socket fur rings -->
+    <ellipse cx="163" cy="153" rx="32" ry="36" fill="#E8C878" opacity="0.22" filter="url(#featherSm)"/>
+    <ellipse cx="237" cy="153" rx="32" ry="36" fill="#E8C878" opacity="0.22" filter="url(#featherSm)"/>
+    <!-- Cheek fur zones -->
+    <ellipse cx="138" cy="190" rx="24" ry="20" fill="#D4A060" opacity="0.15" filter="url(#featherSm)"/>
+    <ellipse cx="262" cy="190" rx="24" ry="20" fill="#D4A060" opacity="0.15" filter="url(#featherSm)"/>
+
+    <!-- Nose bridge shadow -->
+    <path d="M 197 150 Q 200 158 203 168" fill="none" stroke="#6A4828" stroke-width="3" opacity="0.12" stroke-linecap="round"/>
+
+    <!-- ===== SNOUT ===== -->
+    <!-- Muzzle under-shadow (protrusion cue) -->
+    <ellipse cx="200" cy="208" rx="46" ry="11" fill="#4A2E18" opacity="0.2"/>
+    <!-- Snout body -->
+    <ellipse cx="200" cy="195" rx="46" ry="37" fill="url(#snoutGrad)"/>
+    <!-- Snout key-light catch -->
+    <ellipse cx="197" cy="184" rx="22" ry="11" fill="#FFF8E0" opacity="0.2"/>
+    <!-- Forehead-to-snout crease -->
+    <path d="M 163 175 Q 200 171 237 175" fill="none" stroke="#6A4828" stroke-width="2" opacity="0.15" stroke-linecap="round"/>
+
+    <!-- ===== NOSE — large, dark, glossy ===== -->
+    <ellipse cx="200" cy="183" rx="16" ry="12.5" fill="url(#noseGrad)"/>
+    <!-- Nostrils -->
+    <ellipse cx="194.5" cy="184.5" rx="3.5" ry="2.5" fill="#1A1210" opacity="0.68"/>
+    <ellipse cx="205.5" cy="184.5" rx="3.5" ry="2.5" fill="#1A1210" opacity="0.68"/>
+    <!-- Glossy specular -->
+    <ellipse cx="196" cy="179.5" rx="4.5" ry="2.8" fill="#FFF8E0" opacity="0.54"/>
+
+    <!-- ===== MOUTH — gentle smile, hint of teeth ===== -->
+    <!-- Philtrum -->
+    <path d="M 200 195.5 L 200 200" stroke="#3A2822" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+    <!-- Lip shadow -->
+    <path d="M 189 200 Q 200 202 211 200" fill="none" stroke="#5A3828" stroke-width="1.3" opacity="0.3" stroke-linecap="round"/>
+    <!-- Smile -->
+    <path d="M 189 201 Q 200 213 211 201" fill="#3A2218" stroke="#3A2822" stroke-width="1.8" stroke-linecap="round"/>
+    <!-- Teeth glimpse -->
+    <path d="M 195 202 Q 200 205 205 202" fill="#FFF8E8" stroke="none"/>
+    <!-- Mouth interior shadow -->
+    <path d="M 195 203 Q 200 209 205 203" fill="#4A2820" opacity="0.48"/>
+
+    <!-- ===== CHIN FUR PATCH ===== -->
+    <ellipse cx="200" cy="224" rx="18" ry="12" fill="#E8D0B0" opacity="0.36" filter="url(#featherSm)"/>
+    <ellipse cx="200" cy="222" rx="10" ry="7" fill="#F0DCC8" opacity="0.28"/>
+
+    <!-- ===== CHEEK BLUSH + CHEEKBONE LIGHT ===== -->
+    <ellipse cx="140" cy="188" rx="16" ry="9" fill="#E89080" opacity="0.14"/>
+    <ellipse cx="260" cy="188" rx="16" ry="9" fill="#E89080" opacity="0.14"/>
+    <ellipse cx="147" cy="172" rx="13" ry="7" fill="#F8E8D0" opacity="0.18" filter="url(#featherSm)"/>
+    <ellipse cx="253" cy="172" rx="13" ry="7" fill="#F8E8D0" opacity="0.18" filter="url(#featherSm)"/>
+
+    <!-- ===== LEFT EYE ===== -->
+    <g>
+      <!-- Socket depth shadow -->
+      <ellipse cx="163" cy="154" rx="28" ry="34" fill="#3E2818" opacity="0.29"/>
+      <!-- Sclera -->
+      <ellipse cx="163" cy="154" rx="24" ry="30" fill="url(#sclera)"/>
+      <!-- FILLED upper eyelid — thick curved hood -->
+      <path d="M 139 148 Q 141 133 163 131 Q 185 133 187 148 Q 177 141 163 140 Q 149 141 139 148 Z" fill="#5A4230" opacity="0.68"/>
+      <!-- Fur on top of lid -->
+      <ellipse cx="163" cy="133" rx="14" ry="4" fill="#6B4A28" opacity="0.32" filter="url(#featherSm)"/>
+      <!-- Lid light rim -->
+      <path d="M 142 147 Q 163 139 184 147" fill="none" stroke="#8A7050" stroke-width="1" opacity="0.34" stroke-linecap="round"/>
+      <!-- Lower lid crescent -->
+      <path d="M 143 171 Q 163 178 183 171 Q 168 174 163 174 Q 158 174 143 171 Z" fill="#7A6448" opacity="0.22"/>
+      <!-- Iris — warm amber gold -->
+      <circle cx="165" cy="158" r="17" fill="url(#irisGrad)"/>
+      <circle cx="165" cy="158" r="17" fill="url(#irisRim)"/>
+      <!-- Pupil -->
+      <circle cx="165" cy="158" r="10" fill="#180E06"/>
+      <!-- Primary highlight (warm) -->
+      <ellipse cx="157.5" cy="151" rx="6" ry="7.5" fill="url(#hiLarge)" class="sp-a"/>
+      <!-- Secondary highlight -->
+      <circle cx="172" cy="164.5" r="2.5" fill="#FFF8E8" opacity="0.52" class="sp-b"/>
+    </g>
+
+    <!-- ===== RIGHT EYE ===== -->
+    <g>
+      <ellipse cx="237" cy="154" rx="28" ry="34" fill="#3E2818" opacity="0.29"/>
+      <ellipse cx="237" cy="154" rx="24" ry="30" fill="url(#sclera)"/>
+      <!-- Filled upper eyelid -->
+      <path d="M 213 148 Q 215 133 237 131 Q 259 133 261 148 Q 251 141 237 140 Q 223 141 213 148 Z" fill="#5A4230" opacity="0.68"/>
+      <ellipse cx="237" cy="133" rx="14" ry="4" fill="#6B4A28" opacity="0.32" filter="url(#featherSm)"/>
+      <path d="M 216 147 Q 237 139 258 147" fill="none" stroke="#8A7050" stroke-width="1" opacity="0.34" stroke-linecap="round"/>
+      <!-- Lower lid -->
+      <path d="M 217 171 Q 237 178 257 171 Q 242 174 237 174 Q 232 174 217 171 Z" fill="#7A6448" opacity="0.22"/>
+      <!-- Iris -->
+      <circle cx="235" cy="158" r="17" fill="url(#irisGrad)"/>
+      <circle cx="235" cy="158" r="17" fill="url(#irisRim)"/>
+      <!-- Pupil -->
+      <circle cx="235" cy="158" r="10" fill="#180E06"/>
+      <!-- Highlights -->
+      <ellipse cx="242.5" cy="151" rx="6" ry="7.5" fill="url(#hiLarge)" class="sp-b"/>
+      <circle cx="228" cy="164.5" r="2.5" fill="#FFF8E8" opacity="0.52" class="sp-a"/>
+    </g>
+
+    <!-- ===== EYEBROWS — thick, dark, friendly arch ===== -->
+    <path d="M 143 127 Q 163 117 185 123" stroke="#4A3018" stroke-width="4.2" fill="none" stroke-linecap="round" opacity="0.54"/>
+    <path d="M 215 123 Q 237 117 257 127" stroke="#4A3018" stroke-width="4.2" fill="none" stroke-linecap="round" opacity="0.54"/>
+
+  </g>
+  <!-- end head -->
+
+</svg>

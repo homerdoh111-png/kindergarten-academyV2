@@ -1,1 +1,2 @@
-# kindergarten-academyV2
+# kindergarten-academy
+Interactive kindergarten learning app

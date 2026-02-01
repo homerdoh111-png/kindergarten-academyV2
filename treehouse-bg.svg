@@ -1,0 +1,359 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" width="1400" height="900">
+  <defs>
+    <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#5BB8E8;stop-opacity:1" />
+      <stop offset="35%" style="stop-color:#87CEEB;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#B8E4F9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E8F6FF;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="sunGlow" cx="50%" cy="50%">
+      <stop offset="0%" style="stop-color:#FFF176;stop-opacity:1" />
+      <stop offset="40%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#FFB300;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#FF8F00;stop-opacity:0" />
+    </radialGradient>
+    <linearGradient id="trunkGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4E3A25" /><stop offset="25%" style="stop-color:#7A6040" />
+      <stop offset="50%" style="stop-color:#8B7355" /><stop offset="75%" style="stop-color:#6B5D4F" />
+      <stop offset="100%" style="stop-color:#3D2E1E" />
+    </linearGradient>
+    <pattern id="woodTexture" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+      <rect width="100" height="100" fill="#C4622A"/>
+      <path d="M0,15 Q30,12 60,16 T100,15" stroke="#8B4513" stroke-width="1.5" fill="none" opacity="0.25"/>
+      <path d="M0,32 Q40,28 70,33 T100,32" stroke="#8B4513" stroke-width="1" fill="none" opacity="0.2"/>
+      <path d="M0,50 Q25,47 55,51 T100,50" stroke="#8B4513" stroke-width="1.5" fill="none" opacity="0.25"/>
+      <path d="M0,68 Q35,65 65,69 T100,68" stroke="#8B4513" stroke-width="1" fill="none" opacity="0.2"/>
+      <path d="M0,85 Q30,82 60,86 T100,85" stroke="#8B4513" stroke-width="1.5" fill="none" opacity="0.2"/>
+      <circle cx="25" cy="25" r="6" fill="#654321" opacity="0.35"/>
+      <circle cx="75" cy="72" r="5" fill="#654321" opacity="0.25"/>
+    </pattern>
+    <radialGradient id="leafGradient" cx="35%" cy="35%">
+      <stop offset="0%" style="stop-color:#A8E6A3" /><stop offset="40%" style="stop-color:#4CAF50" />
+      <stop offset="100%" style="stop-color:#2E7D32" />
+    </radialGradient>
+    <radialGradient id="darkLeafGradient" cx="40%" cy="40%">
+      <stop offset="0%" style="stop-color:#66BB6A" /><stop offset="50%" style="stop-color:#388E3C" />
+      <stop offset="100%" style="stop-color:#1B5E20" />
+    </radialGradient>
+    <radialGradient id="lightLeafGradient" cx="30%" cy="30%">
+      <stop offset="0%" style="stop-color:#C8E6C9" /><stop offset="50%" style="stop-color:#66BB6A" />
+      <stop offset="100%" style="stop-color:#43A047" />
+    </radialGradient>
+    <linearGradient id="roofGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#C62828" /><stop offset="40%" style="stop-color:#B71C1C" />
+      <stop offset="100%" style="stop-color:#7F0000" />
+    </linearGradient>
+    <linearGradient id="grassGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#66BB6A" /><stop offset="50%" style="stop-color:#43A047" />
+      <stop offset="100%" style="stop-color:#2E7D32" />
+    </linearGradient>
+    <linearGradient id="ropeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#8D6E63" /><stop offset="50%" style="stop-color:#A1887F" />
+      <stop offset="100%" style="stop-color:#6D4C41" />
+    </linearGradient>
+    <radialGradient id="lightBulbGlow" cx="50%" cy="50%">
+      <stop offset="0%" style="stop-color:#FFF9C4;stop-opacity:1" />
+      <stop offset="40%" style="stop-color:#FFD54F;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#FFB300;stop-opacity:0" />
+    </radialGradient>
+    <filter id="treeShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="8"/><feOffset dx="4" dy="8" result="offsetblur"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.35"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="houseShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="12"/><feOffset dx="0" dy="12" result="offsetblur"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.4"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="fireflyGlow" x="-200%" y="-200%" width="500%" height="500%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4"/>
+    </filter>
+    <style>
+      @keyframes rotateSunRays { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+      @keyframes cloudDrift1 { 0% { transform: translateX(0); } 100% { transform: translateX(60px); } }
+      @keyframes cloudDrift2 { 0% { transform: translateX(0); } 100% { transform: translateX(-50px); } }
+      @keyframes birdFly { 0%,100% { transform: translateX(0) translateY(0); } 25% { transform: translateX(15px) translateY(-8px); } 50% { transform: translateX(30px) translateY(0); } 75% { transform: translateX(15px) translateY(5px); } }
+      @keyframes fireflyPulse { 0%,100% { opacity: 0.2; } 50% { opacity: 0.9; } }
+      @keyframes smokeRise { 0% { transform: translateY(0); opacity: 0.55; } 100% { transform: translateY(-30px); opacity: 0; } }
+      @keyframes tireSwing { 0%,100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
+      .sun-rays { animation: rotateSunRays 40s linear infinite; transform-origin: 1200px 120px; }
+      .cloud-group-1 { animation: cloudDrift1 18s ease-in-out infinite alternate; }
+      .cloud-group-2 { animation: cloudDrift2 22s ease-in-out infinite alternate; }
+      .cloud-group-3 { animation: cloudDrift1 26s ease-in-out infinite alternate; }
+      .bird-1 { animation: birdFly 3s ease-in-out infinite; }
+      .bird-2 { animation: birdFly 3.5s ease-in-out infinite 0.5s; }
+      .bird-3 { animation: birdFly 2.8s ease-in-out infinite 1s; }
+      .firefly-1 { animation: fireflyPulse 2.5s ease-in-out infinite; }
+      .firefly-2 { animation: fireflyPulse 3s ease-in-out infinite 1s; }
+      .firefly-3 { animation: fireflyPulse 2.8s ease-in-out infinite 0.5s; }
+      .firefly-4 { animation: fireflyPulse 3.2s ease-in-out infinite 1.5s; }
+      .smoke-1 { animation: smokeRise 4s ease-out infinite; }
+      .smoke-2 { animation: smokeRise 4s ease-out infinite 1.3s; }
+      .smoke-3 { animation: smokeRise 4s ease-out infinite 2.6s; }
+      .tire-swing { animation: tireSwing 3s ease-in-out infinite; transform-origin: 548px 455px; }
+    </style>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="1400" height="900" fill="url(#skyGradient)"/>
+
+  <!-- Sun -->
+  <g id="sun">
+    <circle cx="1200" cy="120" r="100" fill="url(#sunGlow)" opacity="0.5"/>
+    <g class="sun-rays" opacity="0.35">
+      <line x1="1200" y1="40" x2="1200" y2="10" stroke="#FFD700" stroke-width="4" stroke-linecap="round"/>
+      <line x1="1200" y1="200" x2="1200" y2="230" stroke="#FFD700" stroke-width="4" stroke-linecap="round"/>
+      <line x1="1120" y1="120" x2="1090" y2="120" stroke="#FFD700" stroke-width="4" stroke-linecap="round"/>
+      <line x1="1280" y1="120" x2="1310" y2="120" stroke="#FFD700" stroke-width="4" stroke-linecap="round"/>
+      <line x1="1143" y1="63" x2="1121" y2="41" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
+      <line x1="1257" y1="177" x2="1279" y2="199" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
+      <line x1="1257" y1="63" x2="1279" y2="41" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
+      <line x1="1143" y1="177" x2="1121" y2="199" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
+    </g>
+    <circle cx="1200" cy="120" r="55" fill="#FFD700"/>
+    <circle cx="1200" cy="120" r="48" fill="#FFE082"/>
+    <circle cx="1185" cy="105" r="16" fill="#FFF9C4" opacity="0.7"/>
+  </g>
+
+  <!-- Birds -->
+  <g class="bird-1" transform="translate(350, 180)">
+    <path d="M0,0 Q-12,-10 -22,-5" stroke="#4E6B8A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M0,0 Q12,-10 22,-5" stroke="#4E6B8A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  </g>
+  <g class="bird-2" transform="translate(420, 150)">
+    <path d="M0,0 Q-9,-8 -17,-4" stroke="#5A7A9A" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M0,0 Q9,-8 17,-4" stroke="#5A7A9A" stroke-width="2" fill="none" stroke-linecap="round"/>
+  </g>
+  <g class="bird-3" transform="translate(380, 210)">
+    <path d="M0,0 Q-7,-6 -13,-3" stroke="#607080" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    <path d="M0,0 Q7,-6 13,-3" stroke="#607080" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- Clouds -->
+  <g class="cloud-group-1" opacity="0.6">
+    <ellipse cx="150" cy="160" rx="65" ry="22" fill="#FFFFFF"/>
+    <ellipse cx="130" cy="150" rx="38" ry="28" fill="#FFFFFF"/>
+    <ellipse cx="170" cy="152" rx="45" ry="30" fill="#FFFFFF"/>
+  </g>
+  <g class="cloud-group-2" opacity="0.75">
+    <ellipse cx="870" cy="180" rx="90" ry="30" fill="#FFFFFF"/>
+    <ellipse cx="840" cy="170" rx="55" ry="36" fill="#FFFFFF"/>
+    <ellipse cx="910" cy="172" rx="65" ry="38" fill="#FFFFFF"/>
+    <ellipse cx="870" cy="160" rx="40" ry="22" fill="#F5F5F5"/>
+  </g>
+  <g class="cloud-group-3" opacity="0.85">
+    <ellipse cx="1080" cy="200" rx="75" ry="28" fill="#FFFFFF"/>
+    <ellipse cx="1055" cy="190" rx="48" ry="33" fill="#FFFFFF"/>
+    <ellipse cx="1105" cy="188" rx="58" ry="35" fill="#FFFFFF"/>
+    <ellipse cx="1080" cy="178" rx="35" ry="20" fill="#F0F0F0"/>
+  </g>
+
+  <!-- Background hills -->
+  <ellipse cx="-50" cy="720" rx="350" ry="180" fill="#5DAA6B" opacity="0.45"/>
+  <ellipse cx="350" cy="740" rx="300" ry="160" fill="#4E9A5E" opacity="0.4"/>
+  <ellipse cx="1050" cy="730" rx="320" ry="190" fill="#5DAA6B" opacity="0.42"/>
+  <ellipse cx="1400" cy="725" rx="280" ry="170" fill="#4E9A5E" opacity="0.38"/>
+
+  <!-- Grass ground -->
+  <ellipse cx="700" cy="790" rx="800" ry="120" fill="#4CAF50"/>
+  <rect x="0" y="760" width="1400" height="140" fill="url(#grassGradient)"/>
+  <ellipse cx="700" cy="762" rx="200" ry="18" fill="#2E7D32" opacity="0.4"/>
+
+  <!-- Grass tufts -->
+  <g opacity="0.5" fill="none" stroke="#2E7D32" stroke-width="2.5" stroke-linecap="round">
+    <path d="M40,780 Q43,758 46,780"/><path d="M100,785 Q103,762 106,785"/>
+    <path d="M180,778 Q183,755 186,778"/><path d="M280,782 Q283,760 286,782"/>
+    <path d="M420,779 Q423,757 426,779"/><path d="M550,784 Q553,762 556,784"/>
+    <path d="M850,780 Q853,758 856,780"/><path d="M980,783 Q983,761 986,783"/>
+    <path d="M1100,779 Q1103,757 1106,779"/><path d="M1250,782 Q1253,760 1256,782"/>
+    <path d="M1360,778 Q1363,756 1366,778"/>
+  </g>
+
+  <!-- Ground flowers -->
+  <circle cx="80" cy="770" r="5" fill="#EC407A" opacity="0.8"/><circle cx="80" cy="770" r="2" fill="#FCE4EC"/>
+  <circle cx="320" cy="774" r="4" fill="#E91E63" opacity="0.75"/><circle cx="320" cy="774" r="1.5" fill="#FCE4EC"/>
+  <circle cx="500" cy="768" r="5" fill="#AD1457" opacity="0.7"/><circle cx="500" cy="768" r="2" fill="#FCE4EC"/>
+  <circle cx="200" cy="772" r="4" fill="#FDD835" opacity="0.85"/><circle cx="200" cy="772" r="1.5" fill="#FFF9C4"/>
+  <circle cx="750" cy="769" r="5" fill="#F9A825" opacity="0.8"/><circle cx="750" cy="769" r="2" fill="#FFF9C4"/>
+  <circle cx="1050" cy="773" r="4" fill="#FDD835" opacity="0.8"/><circle cx="1050" cy="773" r="1.5" fill="#FFF9C4"/>
+  <circle cx="1180" cy="770" r="4" fill="#7E57C2" opacity="0.75"/><circle cx="1180" cy="770" r="1.5" fill="#EDE7F6"/>
+  <circle cx="950" cy="772" r="5" fill="#5E35B1" opacity="0.7"/><circle cx="950" cy="772" r="2" fill="#EDE7F6"/>
+  <circle cx="1320" cy="771" r="4" fill="#FFFFFF" opacity="0.9" stroke="#E0E0E0" stroke-width="0.5"/><circle cx="1320" cy="771" r="1.5" fill="#FFF176"/>
+  <circle cx="440" cy="773" r="3.5" fill="#FFFFFF" opacity="0.85" stroke="#E0E0E0" stroke-width="0.5"/><circle cx="440" cy="773" r="1.2" fill="#FFF176"/>
+
+  <!-- Background trees -->
+  <g opacity="0.55">
+    <rect x="155" y="660" width="22" height="100" rx="10" fill="#5D4E37"/>
+    <ellipse cx="166" cy="640" rx="45" ry="55" fill="url(#darkLeafGradient)"/>
+    <ellipse cx="166" cy="625" rx="32" ry="40" fill="url(#leafGradient)"/>
+    <rect x="1195" y="670" width="20" height="90" rx="9" fill="#5D4E37"/>
+    <ellipse cx="1205" cy="650" rx="40" ry="48" fill="url(#darkLeafGradient)"/>
+    <ellipse cx="1205" cy="637" rx="28" ry="35" fill="url(#leafGradient)"/>
+  </g>
+
+  <!-- Main tree trunk -->
+  <g id="mainTree" filter="url(#treeShadow)">
+    <rect x="640" y="390" width="120" height="370" rx="58" fill="url(#trunkGradient)"/>
+    <ellipse cx="668" cy="490" rx="22" ry="30" fill="#3D2E1E" opacity="0.25"/>
+    <ellipse cx="722" cy="570" rx="18" ry="26" fill="#3D2E1E" opacity="0.22"/>
+    <ellipse cx="682" cy="640" rx="20" ry="28" fill="#3D2E1E" opacity="0.2"/>
+    <path d="M658,430 Q662,470 658,520" stroke="#2E1F10" stroke-width="1.5" fill="none" opacity="0.3"/>
+    <path d="M732,450 Q736,490 732,540" stroke="#2E1F10" stroke-width="1.5" fill="none" opacity="0.3"/>
+    <path d="M674,540 Q678,580 674,630" stroke="#2E1F10" stroke-width="1.5" fill="none" opacity="0.25"/>
+    <path d="M710,560 Q713,600 710,650" stroke="#2E1F10" stroke-width="1.2" fill="none" opacity="0.2"/>
+    <path d="M640,740 Q620,745 610,760 L650,760 Z" fill="#5D4E37"/>
+    <path d="M760,740 Q780,745 790,760 L750,760 Z" fill="#5D4E37"/>
+    <ellipse cx="595" cy="470" rx="75" ry="30" fill="url(#trunkGradient)" transform="rotate(-30 595 470)"/>
+    <ellipse cx="805" cy="470" rx="75" ry="30" fill="url(#trunkGradient)" transform="rotate(30 805 470)"/>
+  </g>
+
+  <!-- Tire swing -->
+  <g class="tire-swing">
+    <line x1="545" y1="455" x2="530" y2="540" stroke="url(#ropeGradient)" stroke-width="3" stroke-linecap="round"/>
+    <line x1="565" y1="455" x2="550" y2="540" stroke="url(#ropeGradient)" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="540" cy="555" r="28" fill="#2D2D2D" stroke="#1A1A1A" stroke-width="3"/>
+    <circle cx="540" cy="555" r="18" fill="#3D3D3D"/>
+    <path d="M525,545 Q540,538 555,545" stroke="#555" stroke-width="2" fill="none" opacity="0.6"/>
+  </g>
+
+  <!-- Foliage layers -->
+  <g id="foliage">
+    <ellipse cx="580" cy="310" rx="130" ry="140" fill="#1B5E20" opacity="0.6"/>
+    <ellipse cx="820" cy="330" rx="120" ry="130" fill="#1B5E20" opacity="0.55"/>
+    <ellipse cx="700" cy="280" rx="100" ry="110" fill="#1B5E20" opacity="0.5"/>
+    <ellipse cx="620" cy="290" rx="150" ry="155" fill="url(#darkLeafGradient)"/>
+    <ellipse cx="780" cy="310" rx="140" ry="150" fill="url(#darkLeafGradient)"/>
+    <ellipse cx="700" cy="260" rx="160" ry="170" fill="url(#darkLeafGradient)"/>
+    <ellipse cx="660" cy="270" rx="145" ry="150" fill="url(#leafGradient)"/>
+    <ellipse cx="740" cy="285" rx="140" ry="145" fill="url(#leafGradient)"/>
+    <ellipse cx="700" cy="240" rx="170" ry="175" fill="url(#leafGradient)"/>
+    <ellipse cx="680" cy="250" rx="110" ry="115" fill="url(#lightLeafGradient)" opacity="0.7"/>
+    <ellipse cx="720" cy="260" rx="100" ry="108" fill="url(#lightLeafGradient)" opacity="0.65"/>
+    <ellipse cx="700" cy="230" rx="80" ry="90" fill="url(#lightLeafGradient)" opacity="0.55"/>
+    <g opacity="0.35" fill="none" stroke="#1B5E20" stroke-width="1.5">
+      <path d="M650,240 Q660,248 670,240"/><path d="M690,255 Q700,263 710,255"/>
+      <path d="M730,242 Q740,250 750,242"/><path d="M660,280 Q670,288 680,280"/>
+      <path d="M710,275 Q720,283 730,275"/>
+    </g>
+  </g>
+
+  <!-- Treehouse -->
+  <g id="treehouse" filter="url(#houseShadow)">
+    <rect x="500" y="450" width="400" height="250" rx="12" fill="url(#woodTexture)" stroke="#5D4037" stroke-width="3"/>
+    <line x1="500" y1="478" x2="900" y2="478" stroke="#8B4513" stroke-width="1.5" opacity="0.3"/>
+    <line x1="500" y1="506" x2="900" y2="506" stroke="#8B4513" stroke-width="1.5" opacity="0.3"/>
+    <line x1="500" y1="534" x2="900" y2="534" stroke="#8B4513" stroke-width="1.5" opacity="0.3"/>
+    <line x1="500" y1="562" x2="900" y2="562" stroke="#8B4513" stroke-width="1.5" opacity="0.3"/>
+    <line x1="500" y1="590" x2="900" y2="590" stroke="#8B4513" stroke-width="1.5" opacity="0.3"/>
+    <line x1="500" y1="618" x2="900" y2="618" stroke="#8B4513" stroke-width="1.5" opacity="0.3"/>
+    <line x1="500" y1="646" x2="900" y2="646" stroke="#8B4513" stroke-width="1.5" opacity="0.3"/>
+
+    <!-- Window -->
+    <rect x="545" y="485" width="110" height="110" rx="12" fill="#B3E5FC" stroke="#5D4037" stroke-width="5"/>
+    <line x1="545" y1="540" x2="655" y2="540" stroke="#5D4037" stroke-width="4"/>
+    <line x1="600" y1="485" x2="600" y2="595" stroke="#5D4037" stroke-width="4"/>
+    <rect x="555" y="495" width="32" height="30" rx="4" fill="#FFFFFF" opacity="0.25"/>
+    <rect x="610" y="550" width="28" height="24" rx="3" fill="#FFFFFF" opacity="0.15"/>
+    <!-- Window box -->
+    <rect x="548" y="592" width="106" height="18" rx="4" fill="#8D6E63"/>
+    <circle cx="558" cy="588" r="7" fill="#FF5252"/><circle cx="558" cy="588" r="3" fill="#FFCDD2"/>
+    <circle cx="575" cy="585" r="7" fill="#FF80AB"/><circle cx="575" cy="585" r="3" fill="#FCE4EC"/>
+    <circle cx="592" cy="587" r="7" fill="#E91E63"/><circle cx="592" cy="587" r="3" fill="#FCE4EC"/>
+    <circle cx="609" cy="585" r="7" fill="#FF4081"/><circle cx="609" cy="585" r="3" fill="#FCE4EC"/>
+    <circle cx="626" cy="588" r="7" fill="#FF5252"/><circle cx="626" cy="588" r="3" fill="#FFCDD2"/>
+    <circle cx="643" cy="586" r="7" fill="#EC407A"/><circle cx="643" cy="586" r="3" fill="#FCE4EC"/>
+
+    <!-- Door -->
+    <rect x="725" y="535" width="90" height="130" rx="45" ry="0" fill="#6D4C41" stroke="#4E342E" stroke-width="4"/>
+    <path d="M725,535 Q770,510 815,535" fill="#5D4037"/>
+    <rect x="740" y="548" width="60" height="42" rx="6" fill="#4E342E" opacity="0.35"/>
+    <rect x="740" y="602" width="60" height="42" rx="6" fill="#4E342E" opacity="0.35"/>
+    <circle cx="800" cy="600" r="7" fill="#FFD700" stroke="#B8860B" stroke-width="2.5"/>
+    <circle cx="798" cy="597" r="2.5" fill="#FFF9C4" opacity="0.6"/>
+
+    <!-- Roof -->
+    <path d="M 475 452 L 700 340 L 925 452 Z" fill="url(#roofGradient)" stroke="#4E0000" stroke-width="2.5"/>
+    <path d="M 475 452 L 700 340 L 925 452" stroke="#7F0000" stroke-width="4" fill="none" opacity="0.3"/>
+    <g opacity="0.25">
+      <path d="M520,430 L700,350 L880,430" stroke="#4E0000" stroke-width="1.5" fill="none"/>
+      <path d="M545,408 L700,355 L855,408" stroke="#4E0000" stroke-width="1" fill="none"/>
+    </g>
+
+    <!-- Chimney -->
+    <rect x="780" y="325" width="42" height="85" rx="3" fill="#795548" stroke="#5D4037" stroke-width="2.5"/>
+    <rect x="774" y="315" width="54" height="16" rx="3" fill="#5D4037" stroke="#4E342E" stroke-width="1.5"/>
+    <ellipse class="smoke-1" cx="801" cy="300" rx="12" ry="16" fill="#BDBDBD" opacity="0.55"/>
+    <ellipse class="smoke-2" cx="805" cy="278" rx="16" ry="20" fill="#BDBDBD" opacity="0.45"/>
+    <ellipse class="smoke-3" cx="810" cy="253" rx="14" ry="18" fill="#BDBDBD" opacity="0.35"/>
+
+    <!-- Porch railing -->
+    <line x1="500" y1="670" x2="900" y2="670" stroke="#5D4037" stroke-width="5"/>
+    <line x1="500" y1="700" x2="900" y2="700" stroke="#5D4037" stroke-width="3.5"/>
+    <g fill="#6D4C41" stroke="#5D4037" stroke-width="1">
+      <rect x="518" y="670" width="5" height="30" rx="2"/><rect x="558" y="670" width="5" height="30" rx="2"/>
+      <rect x="598" y="670" width="5" height="30" rx="2"/><rect x="638" y="670" width="5" height="30" rx="2"/>
+      <rect x="758" y="670" width="5" height="30" rx="2"/><rect x="798" y="670" width="5" height="30" rx="2"/>
+      <rect x="838" y="670" width="5" height="30" rx="2"/><rect x="878" y="670" width="5" height="30" rx="2"/>
+    </g>
+
+    <!-- String lights -->
+    <path d="M510,455 Q550,465 590,458 Q630,452 670,462 Q710,470 750,460 Q790,452 830,462 Q870,468 900,455" stroke="#555" stroke-width="1.5" fill="none" opacity="0.6"/>
+    <g filter="url(#softGlow)">
+      <circle cx="530" cy="460" r="5" fill="#FFF9C4"/><circle cx="530" cy="460" r="8" fill="url(#lightBulbGlow)" opacity="0.7"/>
+      <circle cx="570" cy="462" r="5" fill="#FFE082"/><circle cx="570" cy="462" r="8" fill="url(#lightBulbGlow)" opacity="0.65"/>
+      <circle cx="610" cy="457" r="5" fill="#FFF9C4"/><circle cx="610" cy="457" r="8" fill="url(#lightBulbGlow)" opacity="0.7"/>
+      <circle cx="650" cy="461" r="5" fill="#FFE082"/><circle cx="650" cy="461" r="8" fill="url(#lightBulbGlow)" opacity="0.6"/>
+      <circle cx="690" cy="465" r="5" fill="#FFF9C4"/><circle cx="690" cy="465" r="8" fill="url(#lightBulbGlow)" opacity="0.7"/>
+      <circle cx="730" cy="458" r="5" fill="#FFE082"/><circle cx="730" cy="458" r="8" fill="url(#lightBulbGlow)" opacity="0.65"/>
+      <circle cx="770" cy="462" r="5" fill="#FFF9C4"/><circle cx="770" cy="462" r="8" fill="url(#lightBulbGlow)" opacity="0.7"/>
+      <circle cx="810" cy="460" r="5" fill="#FFE082"/><circle cx="810" cy="460" r="8" fill="url(#lightBulbGlow)" opacity="0.6"/>
+      <circle cx="850" cy="464" r="5" fill="#FFF9C4"/><circle cx="850" cy="464" r="8" fill="url(#lightBulbGlow)" opacity="0.7"/>
+      <circle cx="885" cy="458" r="5" fill="#FFE082"/><circle cx="885" cy="458" r="8" fill="url(#lightBulbGlow)" opacity="0.65"/>
+    </g>
+
+    <!-- Flower pots -->
+    <rect x="508" y="648" width="28" height="32" rx="3" fill="#A1887F" stroke="#8D6E63" stroke-width="1.5"/>
+    <rect x="505" y="645" width="34" height="6" rx="2" fill="#8D6E63"/>
+    <circle cx="516" cy="641" r="6" fill="#FF5252"/><circle cx="516" cy="641" r="2.5" fill="#FFCDD2"/>
+    <circle cx="528" cy="638" r="6" fill="#CE93D8"/><circle cx="528" cy="638" r="2.5" fill="#F3E5F5"/>
+    <circle cx="540" cy="641" r="5" fill="#64B5F6"/><circle cx="540" cy="641" r="2" fill="#E3F2FD"/>
+    <rect x="864" y="648" width="28" height="32" rx="3" fill="#A1887F" stroke="#8D6E63" stroke-width="1.5"/>
+    <rect x="861" y="645" width="34" height="6" rx="2" fill="#8D6E63"/>
+    <circle cx="872" cy="641" r="6" fill="#81C784"/><circle cx="872" cy="641" r="2.5" fill="#E8F5E9"/>
+    <circle cx="884" cy="638" r="6" fill="#FFB74D"/><circle cx="884" cy="638" r="2.5" fill="#FFF3E0"/>
+    <circle cx="896" cy="641" r="5" fill="#E57373"/><circle cx="896" cy="641" r="2" fill="#FFCDD2"/>
+  </g>
+
+  <!-- Fireflies -->
+  <g class="firefly-1"><circle cx="480" cy="520" r="4" fill="#FFEE58" filter="url(#fireflyGlow)"/><circle cx="480" cy="520" r="2" fill="#FFF"/></g>
+  <g class="firefly-2"><circle cx="920" cy="500" r="3.5" fill="#FFEE58" filter="url(#fireflyGlow)"/><circle cx="920" cy="500" r="1.8" fill="#FFF"/></g>
+  <g class="firefly-3"><circle cx="450" cy="600" r="3" fill="#FFEE58" filter="url(#fireflyGlow)"/><circle cx="450" cy="600" r="1.5" fill="#FFF"/></g>
+  <g class="firefly-4"><circle cx="950" cy="580" r="3.5" fill="#FFEE58" filter="url(#fireflyGlow)"/><circle cx="950" cy="580" r="1.8" fill="#FFF"/></g>
+
+  <!-- Butterflies -->
+  <g transform="translate(280, 380)">
+    <ellipse cx="-10" cy="0" rx="13" ry="19" fill="#FF80AB" opacity="0.85" transform="rotate(-5 -10 0)"/>
+    <ellipse cx="-10" cy="2" rx="8" ry="13" fill="#FCE4EC" transform="rotate(-5 -10 0)"/>
+    <ellipse cx="10" cy="0" rx="13" ry="19" fill="#FF80AB" opacity="0.85" transform="rotate(5 10 0)"/>
+    <ellipse cx="10" cy="2" rx="8" ry="13" fill="#FCE4EC" transform="rotate(5 10 0)"/>
+    <ellipse cx="0" cy="0" rx="2.5" ry="10" fill="#4E342E"/>
+    <circle cx="0" cy="-11" r="2.5" fill="#4E342E"/>
+    <circle cx="-8" cy="-3" r="3" fill="#AD1457" opacity="0.5"/>
+    <circle cx="8" cy="-3" r="3" fill="#AD1457" opacity="0.5"/>
+  </g>
+  <g transform="translate(1120, 330)">
+    <ellipse cx="-8" cy="0" rx="11" ry="16" fill="#FFB300" opacity="0.85" transform="rotate(-4 -8 0)"/>
+    <ellipse cx="-8" cy="1" rx="7" ry="11" fill="#FFF9C4" transform="rotate(-4 -8 0)"/>
+    <ellipse cx="8" cy="0" rx="11" ry="16" fill="#FFB300" opacity="0.85" transform="rotate(4 8 0)"/>
+    <ellipse cx="8" cy="1" rx="7" ry="11" fill="#FFF9C4" transform="rotate(4 8 0)"/>
+    <ellipse cx="0" cy="0" rx="2" ry="8" fill="#4E342E"/>
+    <circle cx="0" cy="-9" r="2" fill="#4E342E"/>
+    <circle cx="-6" cy="-2" r="2.5" fill="#E65100" opacity="0.5"/>
+    <circle cx="6" cy="-2" r="2.5" fill="#E65100" opacity="0.5"/>
+  </g>
+</svg>
