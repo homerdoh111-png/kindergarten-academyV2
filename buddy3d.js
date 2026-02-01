@@ -84,10 +84,14 @@
     });
     const dpr = clamp(window.devicePixelRatio || 1, 1, 2);
     renderer.setPixelRatio(dpr);
-    renderer.setSize(container.clientWidth, container.clientHeight, false);
+    // Size using the rendered box (handles CSS transforms / animations better
+    // than clientWidth/clientHeight in some layouts).
+    const initRect = container.getBoundingClientRect();
+    renderer.setSize(Math.max(1, Math.round(initRect.width)), Math.max(1, Math.round(initRect.height)), false);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.1;
+    // Slightly brighter/softer for a friendly mascot look.
+    renderer.toneMappingExposure = 1.18;
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
@@ -97,17 +101,19 @@
     // Scene + Camera
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
-      32,
-      container.clientWidth / Math.max(1, container.clientHeight),
+      38,
+      Math.max(1, initRect.width) / Math.max(1, initRect.height),
       0.1,
       50
     );
-    camera.position.set(0, 1.05, 4.2);
+    // Pull back slightly to avoid an "in-your-face" look on smaller screens.
+    camera.position.set(0, 1.08, 5.0);
+    camera.lookAt(0, 0.9, 0.35);
 
     // Lighting (soft Pixar-ish)
-    scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+    scene.add(new THREE.AmbientLight(0xffffff, 0.82));
 
-    const key = new THREE.DirectionalLight(0xfff0dd, 1.25);
+    const key = new THREE.DirectionalLight(0xfff0dd, 1.05);
     key.position.set(3.5, 5.5, 3.0);
     key.castShadow = true;
     key.shadow.mapSize.set(1024, 1024);
@@ -119,16 +125,16 @@
     key.shadow.camera.bottom = -4;
     scene.add(key);
 
-    const fill = new THREE.DirectionalLight(0xd8f0ff, 0.55);
+    const fill = new THREE.DirectionalLight(0xd8f0ff, 0.70);
     fill.position.set(-5.0, 2.5, 5.5);
     scene.add(fill);
 
-    const rim = new THREE.DirectionalLight(0xffffff, 0.45);
+    const rim = new THREE.DirectionalLight(0xffffff, 0.55);
     rim.position.set(-2.0, 3.5, -6.0);
     scene.add(rim);
 
     // Ground (subtle shadow catcher)
-    const groundMat = new THREE.ShadowMaterial({ opacity: 0.22 });
+    const groundMat = new THREE.ShadowMaterial({ opacity: 0.16 });
     const ground = new THREE.Mesh(new THREE.PlaneGeometry(20, 20), groundMat);
     ground.rotation.x = -Math.PI / 2;
     ground.position.y = -1.1;
@@ -163,15 +169,21 @@
       metalness: 0.0,
       map: bandanaTex,
     });
+    // Avoid pure blacks (can look "scary" under strong lighting).
     const darkMat = new THREE.MeshStandardMaterial({
-      color: new THREE.Color("#2d1c12"),
-      roughness: 0.65,
+      color: new THREE.Color("#3a261b"),
+      roughness: 0.8,
       metalness: 0.02,
     });
     const noseMat = new THREE.MeshStandardMaterial({
-      color: new THREE.Color("#1a0f0a"),
-      roughness: 0.45,
-      metalness: 0.05,
+      color: new THREE.Color("#24140d"),
+      roughness: 0.55,
+      metalness: 0.03,
+    });
+    const browMat = new THREE.MeshStandardMaterial({
+      color: new THREE.Color("#4a2e21"),
+      roughness: 0.85,
+      metalness: 0.0,
     });
     const eyeWhiteMat = new THREE.MeshStandardMaterial({
       color: new THREE.Color("#ffffff"),
@@ -184,8 +196,8 @@
       metalness: 0.0,
     });
     const pupilMat = new THREE.MeshStandardMaterial({
-      color: new THREE.Color("#0b0706"),
-      roughness: 0.3,
+      color: new THREE.Color("#120a08"),
+      roughness: 0.35,
       metalness: 0.0,
     });
 
@@ -274,7 +286,8 @@
       iris.position.set(0, -0.02, 0.16);
       group.add(iris);
 
-      const pupil = new THREE.Mesh(new THREE.SphereGeometry(0.06, 18, 18), pupilMat);
+      // Slightly smaller pupils read friendlier on web.
+      const pupil = new THREE.Mesh(new THREE.SphereGeometry(0.045, 18, 18), pupilMat);
       pupil.position.set(0, -0.03, 0.22);
       group.add(pupil);
 
@@ -284,7 +297,7 @@
 
       // Eyelid (blink)
       const lid = new THREE.Mesh(new THREE.SphereGeometry(0.225, 18, 18), furMat);
-      lid.scale.set(1.18, 0.12, 0.92);
+      lid.scale.set(1.18, 0.08, 0.92);
       lid.position.set(0, 0.10, 0.03);
       group.add(lid);
 
@@ -297,7 +310,7 @@
 
     // Brows (thicker)
     function brow(x) {
-      const b = new THREE.Mesh(new THREE.CapsuleGeometry(0.16, 0.18, 6, 16), darkMat);
+      const b = new THREE.Mesh(new THREE.CapsuleGeometry(0.16, 0.18, 6, 16), browMat);
       b.position.set(x, 1.22, 1.03);
       b.rotation.z = x > 0 ? -0.22 : 0.22;
       b.rotation.y = x > 0 ? -0.08 : 0.08;
@@ -383,11 +396,13 @@
 
     // Resize handling
     function resize() {
-      const w = container.clientWidth || 1;
-      const h = container.clientHeight || 1;
+      const rect = container.getBoundingClientRect();
+      const w = Math.max(1, Math.round(rect.width));
+      const h = Math.max(1, Math.round(rect.height));
       renderer.setSize(w, h, false);
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
+      camera.lookAt(0, 0.9, 0.35);
     }
     const ro = new ResizeObserver(resize);
     ro.observe(container);
