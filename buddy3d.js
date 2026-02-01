@@ -25,6 +25,12 @@
     last: performance.now(),
     text: "",
     lastBoundaryIdx: 0,
+    // New animation states
+    listening: 0,       // 0→1 ear-perk + wide-eye
+    thinking: 0,        // 0→1 head-tilt + sideeye
+    giggle: 0,          // 0→1 body bounce envelope
+    gigglePhase: 0,     // time phase for bounce oscillation
+    mouthDirect: -1,    // ≥0 means voice.js is driving jaw directly
   };
 
   function makeNoiseTexture(size, baseRGB, variance=18) {
@@ -110,8 +116,8 @@
     camera.position.set(0, 1.08, 5.0);
     camera.lookAt(0, 0.9, 0.35);
 
-    // Lighting (soft Pixar-ish)
-    scene.add(new THREE.AmbientLight(0xffffff, 0.82));
+    // Lighting — warm Pixar three-point setup
+    scene.add(new THREE.AmbientLight(0xfff0dd, 0.72));
 
     const key = new THREE.DirectionalLight(0xfff0dd, 1.05);
     key.position.set(3.5, 5.5, 3.0);
@@ -125,11 +131,11 @@
     key.shadow.camera.bottom = -4;
     scene.add(key);
 
-    const fill = new THREE.DirectionalLight(0xd8f0ff, 0.70);
+    const fill = new THREE.DirectionalLight(0xffe8d0, 0.58);
     fill.position.set(-5.0, 2.5, 5.5);
     scene.add(fill);
 
-    const rim = new THREE.DirectionalLight(0xffffff, 0.55);
+    const rim = new THREE.DirectionalLight(0xffe0a0, 0.48);
     rim.position.set(-2.0, 3.5, -6.0);
     scene.add(rim);
 
@@ -149,7 +155,7 @@
     // Palette from reference vibe
     const furTex = makeNoiseTexture(256, [180, 116, 60], 22);
     const bellyTex = makeNoiseTexture(256, [208, 170, 125], 16);
-    const bandanaTex = makeNoiseTexture(256, [150, 48, 44], 16);
+    const bandanaTex = makeNoiseTexture(256, [224, 72, 72], 12);
 
     const furMat = new THREE.MeshStandardMaterial({
       color: new THREE.Color("#c07a3a"),
@@ -164,8 +170,8 @@
       map: bellyTex,
     });
     const bandanaMat = new THREE.MeshStandardMaterial({
-      color: new THREE.Color("#9a3a35"),
-      roughness: 0.75,
+      color: new THREE.Color("#e04848"),
+      roughness: 0.72,
       metalness: 0.0,
       map: bandanaTex,
     });
@@ -185,15 +191,17 @@
       roughness: 0.85,
       metalness: 0.0,
     });
+    // Sclera: warm off-white — Pixar never uses pure white for eyes
     const eyeWhiteMat = new THREE.MeshStandardMaterial({
-      color: new THREE.Color("#ffffff"),
-      roughness: 0.15,
+      color: new THREE.Color("#fff8e8"),
+      roughness: 0.08,
       metalness: 0.0,
     });
+    // Iris: saturated amber-gold, glossy/wet like a real Pixar eye
     const irisMat = new THREE.MeshStandardMaterial({
-      color: new THREE.Color("#6b3c16"),
-      roughness: 0.25,
-      metalness: 0.0,
+      color: new THREE.Color("#c8882a"),
+      roughness: 0.10,
+      metalness: 0.04,
     });
     const pupilMat = new THREE.MeshStandardMaterial({
       color: new THREE.Color("#120a08"),
@@ -220,19 +228,36 @@
     head.castShadow = true;
     buddy.add(head);
 
-    // Ears
+    // Ear inner — warm peach pink
+    const earInnerMat = new THREE.MeshStandardMaterial({
+      color: new THREE.Color("#e8a888"),
+      roughness: 0.84,
+      metalness: 0.0,
+    });
+
+    // Ears (outer fur + inner peach)
     function ear(x) {
-      const g = new THREE.SphereGeometry(0.30, 28, 28);
-      const m = furMat;
-      const e = new THREE.Mesh(g, m);
-      e.scale.set(1.05, 1.0, 0.72);
-      e.position.set(x, 1.32, 0.15);
-      e.rotation.z = x > 0 ? -0.18 : 0.18;
-      e.castShadow = true;
-      return e;
+      const g = new THREE.Group();
+
+      const outer = new THREE.Mesh(new THREE.SphereGeometry(0.30, 28, 28), furMat);
+      outer.scale.set(1.05, 1.0, 0.72);
+      outer.castShadow = true;
+      g.add(outer);
+
+      // Inner ear — slightly smaller, offset forward so it peeks out
+      const inner = new THREE.Mesh(new THREE.SphereGeometry(0.195, 22, 22), earInnerMat);
+      inner.scale.set(0.90, 0.85, 0.58);
+      inner.position.set(0, -0.01, 0.07);
+      g.add(inner);
+
+      g.position.set(x, 1.32, 0.15);
+      g.rotation.z = x > 0 ? -0.18 : 0.18;
+      return g;
     }
-    buddy.add(ear(-0.83));
-    buddy.add(ear(0.83));
+    const earL = ear(-0.83);
+    const earR = ear(0.83);
+    buddy.add(earL);
+    buddy.add(earR);
 
     // Muzzle
     const muzzle = new THREE.Mesh(new THREE.SphereGeometry(0.48, 34, 34), bellyMat);
@@ -391,8 +416,8 @@
     buddy.position.set(0, -0.05, 0);
     buddy.rotation.y = 0;
 
-    // Soft background tint via scene fog
-    scene.fog = new THREE.Fog(new THREE.Color("#0b1020"), 9.5, 18);
+    // No fog, no scene background — alpha:true canvas lets the
+    // treehouse-bg.svg show through behind Buddy seamlessly.
 
     // Resize handling
     function resize() {
@@ -414,7 +439,7 @@
     // Expose internals we need for animation
     return {
       renderer, scene, camera, buddy,
-      parts: { head, body, jawPivot, smileL, smileR, eyeL, eyeR, browL, browR, armR, armL },
+      parts: { head, body, jawPivot, smileL, smileR, eyeL, eyeR, browL, browR, armR, armL, earL, earR },
       dispose() {
         ro.disconnect();
         renderer.dispose();
@@ -451,7 +476,14 @@
     // Mouth + smile smoothing
     state.mouth = lerp(state.mouth, state.targetMouth, 1.0 - Math.pow(0.0008, dt));
     state.smile = lerp(state.smile, state.targetSmile, 1.0 - Math.pow(0.001, dt));
-    const jawOpen = clamp(state.mouth, 0, 1) * 0.55;
+
+    // mouthDirect override: when voice.js is driving jaw from live amplitude
+    let jawOpen;
+    if (state.mouthDirect >= 0) {
+      jawOpen = clamp(state.mouthDirect, 0, 1) * 0.62;
+    } else {
+      jawOpen = clamp(state.mouth, 0, 1) * 0.55;
+    }
     runtime.parts.jawPivot.rotation.x = -jawOpen;
     runtime.parts.smileL.scale.setScalar(0.9 + state.smile * 0.8);
     runtime.parts.smileR.scale.setScalar(0.9 + state.smile * 0.8);
@@ -460,6 +492,55 @@
     state.brow = lerp(state.brow, state.targetBrow, 1.0 - Math.pow(0.001, dt));
     runtime.parts.browL.rotation.z = 0.22 + state.brow * 0.25;
     runtime.parts.browR.rotation.z = -0.22 - state.brow * 0.25;
+
+    // ── Listening animation: ears perk forward, eyes widen ──
+    state.listening = lerp(state.listening, 0, 1.0 - Math.pow(0.004, dt));
+    if (state.listening > 0.01) {
+      // Ears rotate forward (toward camera)
+      runtime.parts.earL.rotation.x = -0.45 * state.listening;
+      runtime.parts.earR.rotation.x = -0.45 * state.listening;
+      // Eyes widen: scale lids smaller (more open)
+      const lidOpen = 0.12 - 0.06 * state.listening;
+      runtime.parts.eyeL.userData.lid.scale.y = lidOpen;
+      runtime.parts.eyeR.userData.lid.scale.y = lidOpen;
+    } else {
+      runtime.parts.earL.rotation.x = 0;
+      runtime.parts.earR.rotation.x = 0;
+    }
+
+    // ── Thinking animation: head tilts, one brow up, eyes look sideways ──
+    state.thinking = lerp(state.thinking, 0, 1.0 - Math.pow(0.003, dt));
+    if (state.thinking > 0.01) {
+      runtime.parts.head.rotation.z = 0.20 * state.thinking;   // tilt right
+      runtime.parts.head.rotation.y = 0.15 * state.thinking;   // turn slightly
+      // One brow raises (left brow goes up)
+      runtime.parts.browL.rotation.z = 0.22 + 0.30 * state.thinking;
+      // Eyes look sideways
+      runtime.parts.eyeL.userData.iris.position.x = 0.025 * state.thinking;
+      runtime.parts.eyeR.userData.iris.position.x = 0.025 * state.thinking;
+      runtime.parts.eyeL.userData.pupil.position.x = 0.03 * state.thinking;
+      runtime.parts.eyeR.userData.pupil.position.x = 0.03 * state.thinking;
+    } else {
+      runtime.parts.head.rotation.z = 0;
+    }
+
+    // ── Giggle animation: rapid body bounce ──
+    state.giggle = lerp(state.giggle, 0, 1.0 - Math.pow(0.0015, dt));
+    if (state.giggle > 0.01) {
+      state.gigglePhase += dt * 18; // ~3 bounces per second
+      const bounce = Math.abs(Math.sin(state.gigglePhase)) * state.giggle;
+      runtime.parts.body.position.y = -0.25 + bounce * 0.12;
+      runtime.parts.head.position.y = 0.88 + bounce * 0.10;
+      // Arms flap slightly
+      runtime.parts.armL.rotation.z = 0.55 + Math.sin(state.gigglePhase * 1.3) * 0.18 * state.giggle;
+      runtime.parts.armR.rotation.z = -0.55 - Math.sin(state.gigglePhase * 1.3) * 0.18 * state.giggle;
+      // Big smile during giggle
+      runtime.parts.smileL.scale.setScalar(0.9 + (state.smile + state.giggle * 0.4) * 0.8);
+      runtime.parts.smileR.scale.setScalar(0.9 + (state.smile + state.giggle * 0.4) * 0.8);
+    } else {
+      runtime.parts.body.position.y = -0.25;
+      runtime.parts.head.position.y = 0.88;
+    }
 
     // Wave reaction (right arm)
     if (state.wave > 0) {
@@ -542,11 +623,32 @@
       case "thinking":
         state.targetSmile = 0.25;
         state.targetBrow = 0.20;
+        state.thinking = 1.0;   // trigger head-tilt + sideeye
+        break;
+      case "listening":
+        state.targetSmile = 0.40;
+        state.targetBrow = 0.05;
+        state.listening = 1.0;  // trigger ear-perk + wide eyes
         break;
       default:
         state.targetSmile = 0.45;
         state.targetBrow = 0;
     }
+  }
+
+  // Winnie-the-Pooh style body bounce
+  function giggle() {
+    state.giggle = 1.0;
+    state.gigglePhase = 0;
+    state.targetSmile = 0.90;
+    state.targetBrow = -0.30;
+    setTimeout(() => { state.targetSmile = 0.45; state.targetBrow = 0; }, 1200);
+  }
+
+  // Realtime mouth drive from audio amplitude (voice.js calls this every frame)
+  // Pass -1 to release back to normal TTS/viseme control
+  function setMouthDirect(value) {
+    state.mouthDirect = value;
   }
 
   function onBoundary(evt) {
@@ -595,6 +697,8 @@
     say,
     talk,
     onBoundary,
-    setEmotion
+    setEmotion,
+    giggle,
+    setMouthDirect,
   };
 })();
