@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="description" content="Buddy's Kindergarten Academy - Fun learning for kids 4-6">
+    <title>Buddy's Kindergarten Academy 🐻</title>
+    
+    <!-- iOS Home Screen Web App -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Buddy Academy">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- iOS Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="icon-180.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="icon-152.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="icon-120.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#A8E6CF">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Background Elements -->
+    <div class="background-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
+        <div class="floating-cloud cloud-1"></div>
+        <div class="floating-cloud cloud-2"></div>
+        <div class="floating-cloud cloud-3"></div>
+    </div>
+
+    <!-- Auth Screen (Shown when not logged in) -->
+    <div class="screen active" id="authScreen">
+        <div class="auth-container">
+            <h1 class="auth-title">
+                <span class="title-word">Buddy's</span>
+                <span class="title-word">Academy</span>
+            </h1>
+            
+            <!-- Small Buddy -->
+            <div class="buddy-small">
+                <div class="buddy" style="width: 150px; height: 210px;">
+                    <div class="buddy-face">
+                        <div class="buddy-ear buddy-ear-left"></div>
+                        <div class="buddy-ear buddy-ear-right"></div>
+                        <div class="buddy-head">
+                            <div class="buddy-eyes">
+                                <div class="buddy-eye buddy-eye-left">
+                                    <div class="buddy-pupil"></div>
+                                </div>
+                                <div class="buddy-eye buddy-eye-right">
+                                    <div class="buddy-pupil"></div>
+                                </div>
+                            </div>
+                            <div class="buddy-snout">
+                                <div class="buddy-nose"></div>
+                                <div class="buddy-mouth"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buddy-body">
+                        <div class="buddy-belly"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Login Form -->
+            <div class="auth-form" id="loginForm">
+                <h2>Welcome Back!</h2>
+                <form id="loginFormElement">
+                    <input type="email" id="loginEmail" placeholder="Email" required>
+                    <input type="password" id="loginPassword" placeholder="Password" required>
+                    <button type="submit" class="auth-btn">Log In</button>
+                </form>
+                <p class="auth-toggle">
+                    New here? <a href="#" id="showSignup">Create Account</a>
+                </p>
+                <div id="authError" class="auth-error"></div>
+            </div>
+
+            <!-- Signup Form -->
+            <div class="auth-form hidden" id="signupForm">
+                <h2>Create Account</h2>
+                <form id="signupFormElement">
+                    <input type="email" id="signupEmail" placeholder="Parent Email" required>
+                    <input type="password" id="signupPassword" placeholder="Password (6+ characters)" required>
+                    <input type="text" id="childName" placeholder="Child's Name" required>
+                    <input type="number" id="childAge" placeholder="Age" min="3" max="7" required>
+                    <input type="text" id="parentName" placeholder="Parent/Guardian Name" required>
+                    <button type="submit" class="auth-btn">Sign Up</button>
+                </form>
+                <p class="auth-toggle">
+                    Have an account? <a href="#" id="showLogin">Log In</a>
+                </p>
+                <div id="signupError" class="auth-error"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container (Shown when logged in) -->
+    <div class="app-container hidden" id="appContainer">
+        <!-- Header with Stars and User Info -->
+        <header class="app-header">
+            <div class="user-info" id="userInfo">
+                <span id="childNameDisplay"></span>
+            </div>
+            <div class="star-container">
+                <span class="star earned" id="star1">⭐</span>
+                <span class="star" id="star2">⭐</span>
+                <span class="star" id="star3">⭐</span>
+            </div>
+            <button class="settings-btn" id="settingsBtn" aria-label="Settings">⚙️</button>
+        </header>
+
+        <!-- Treehouse Interactive Screen -->
+        <div class="screen" id="treehouseScreen">
+            <!-- Treehouse Background SVG -->
+            <div class="treehouse-background">
+                <img src="treehouse-bg.svg" alt="Treehouse Background" class="treehouse-bg-img">
+            </div>
+            
+            <!-- Sparkle Effects -->
+            <div class="sparkle sparkle-1"></div>
+            <div class="sparkle sparkle-2"></div>
+            <div class="sparkle sparkle-3"></div>
+            <div class="sparkle sparkle-4"></div>
+            <div class="sparkle sparkle-5"></div>
+            <div class="sparkle sparkle-6"></div>
+            
+            <!-- Activity Bubbles -->
+            <button class="activity-bubble bubble-1" data-activity="phonics">
+                <div class="bubble-icon">📖</div>
+                <div class="bubble-label">Phonics</div>
+            </button>
+            
+            <button class="activity-bubble bubble-2" data-activity="numbers">
+                <div class="bubble-icon">🔢</div>
+                <div class="bubble-label">Math</div>
+            </button>
+            
+            <button class="activity-bubble bubble-3" data-activity="letters">
+                <div class="bubble-icon">🔤</div>
+                <div class="bubble-label">Reading</div>
+            </button>
+            
+            <button class="activity-bubble bubble-4" data-activity="shapes">
+                <div class="bubble-icon">⭐</div>
+                <div class="bubble-label">Shapes</div>
+            </button>
+            
+            <button class="activity-bubble bubble-5" data-activity="colors">
+                <div class="bubble-icon">🎨</div>
+                <div class="bubble-label">Colors</div>
+            </button>
+            
+            <button class="activity-bubble bubble-6" data-activity="time">
+                <div class="bubble-icon">🕐</div>
+                <div class="bubble-label">Time</div>
+            </button>
+            
+            <button class="activity-bubble bubble-7" data-activity="logic">
+                <div class="bubble-icon">🧩</div>
+                <div class="bubble-label">Logic</div>
+            </button>
+            
+            <button class="activity-bubble bubble-8" data-activity="rhymes">
+                <div class="bubble-icon">🎵</div>
+                <div class="bubble-label">Rhymes</div>
+            </button>
+            
+            <button class="activity-bubble bubble-9" data-activity="money">
+                <div class="bubble-icon">💰</div>
+                <div class="bubble-label">Money</div>
+            </button>
+            
+            <button class="activity-bubble bubble-10" data-activity="tracker">
+                <div class="bubble-icon">📅</div>
+                <div class="bubble-label">Tasks</div>
+            </button>
+            
+            <!-- Buddy Bear Center -->
+            <div class="buddy-center" id="buddyCenter">
+                <div class="buddy-speech-bubble" id="buddySpeech">
+                    <span class="speech-text">Welcome to my treehouse! 🏡</span>
+                </div>
+                <div class="buddy-3d" id="buddy3d" aria-label="Buddy Bear 3D"></div>
+
+                <!-- Voice interaction controls -->
+                <div class="buddy-voice-controls">
+                    <button class="mic-btn" id="micBtn" aria-label="Talk to Buddy">
+                        <canvas class="mic-waveform" id="micWaveform" width="120" height="40"></canvas>
+                        <span class="mic-icon">🎤</span>
+                        <span class="mic-label" id="micLabel">Talk to me!</span>
+                    </button>
+                    <button class="joke-btn" id="jokeBtn" aria-label="Tell me a joke">
+                        <span class="joke-icon">😄</span>
+                        <span class="joke-label">Joke!</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- All Activity Screens (same as before) -->
+        <!-- Letters Activity -->
+        <div class="screen" id="lettersScreen">
+            <div class="activity-header">
+                <button class="back-btn" id="backFromLetters">← Back</button>
+                <h2 class="activity-title">Learn Your Letters! 🔤</h2>
+            </div>
+
+            <div class="letters-card-container">
+                <div class="letters-card-3d" id="letterCard">
+                    <!-- Front: Letter -->
+                    <div class="letters-face">
+                        <div class="letters-giant" id="letterBig">A</div>
+                    </div>
+                    
+                    <!-- Back: Example -->
+                    <div class="letters-back">
+                        <div class="letters-example-emoji" id="exampleEmoji">🍎</div>
+                        <div class="new-activity-prompt" id="exampleWord" style="font-size: 3rem; margin-top: 1rem;">Apple</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="new-activity-prompt">👆 Tap to flip!</div>
+            
+            <!-- Alphabet Grid -->
+            <div class="letters-alphabet-grid" id="letterExamples">
+                <!-- Generated by JS -->
+            </div>
+
+            <div class="letter-navigation">
+                <button class="nav-btn" id="prevLetter">◀ Previous</button>
+                <button class="nav-btn" id="sayLetter">🔊 Say It!</button>
+                <button class="nav-btn" id="nextLetter">Next ▶</button>
+            </div>
+        </div>
+
+        <!-- Numbers Activity -->
+        <div class="screen" id="numbersScreen">
+            <div class="activity-header">
+                <button class="back-btn" id="backFromNumbers">← Back</button>
+                <h2 class="activity-title">Count With Buddy! 🔢</h2>
+            </div>
+
+            <div class="math-number-giant" id="numberBig">1</div>
+            
+            <div class="new-activity-prompt">Tap to count the objects!</div>
+            
+            <div class="math-counter-display">
+                Count: <span id="countedValue">0</span> / <span id="totalCount">1</span>
+            </div>
+            
+            <div class="math-objects-grid" id="countingObjects">
+                <!-- Objects generated by JS -->
+            </div>
+
+            <div class="number-navigation">
+                <button class="nav-btn" id="prevNumber">◀ Previous</button>
+                <button class="nav-btn" id="nextNumber">Next ▶</button>
+            </div>
+        </div>
+
+        <!-- Shapes Activity -->
+        <div class="screen" id="shapesScreen">
+            <div class="activity-header">
+                <button class="back-btn" id="backFromShapes">← Back</button>
+                <h2 class="activity-title">Find the Shapes! ⭐</h2>
+            </div>
+
+            <div class="shape-challenge">
+                <div class="challenge-prompt">
+                    <p id="shapePrompt">Tap the circle!</p>
+                </div>
+                <div class="shape-options" id="shapeOptions"></div>
+            </div>
+
+            <div class="shape-score">
+                <span id="shapeScore">Score: 0</span>
+            </div>
+        </div>
+
+        <!-- Colors Activity -->
+        <div class="screen" id="colorsScreen">
+            <div class="activity-header">
+                <button class="back-btn" id="backFromColors">← Back</button>
+                <h2 class="activity-title">Learn Colors! 🎨</h2>
+            </div>
+
+            <!-- Paint Bucket -->
+            <div class="colors-paint-bucket">
+                <div class="colors-bucket-body">
+                    <div class="colors-paint-fill" id="colorPaintFill"></div>
+                </div>
+                <div style="position: absolute; bottom: -60px; left: 50%; transform: translateX(-50%); font-size: 3rem; font-weight: 700; color: white; text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);" id="colorName">Red</div>
+            </div>
+
+            <!-- Color Palette -->
+            <div class="colors-palette" id="colorExamples">
+                <!-- Generated by JS -->
+            </div>
+
+            <div class="color-navigation">
+                <button class="nav-btn" id="prevColor">◀ Previous</button>
+                <button class="nav-btn" id="sayColor">🔊 Say It!</button>
+                <button class="nav-btn" id="nextColor">Next ▶</button>
+            </div>
+        </div>
+
+        <!-- Rhymes Activity -->
+        <div class="screen" id="rhymesScreen">
+            <div class="activity-header">
+                <button class="back-btn" id="backFromRhymes">← Back</button>
+                <h2 class="activity-title">Rhyme Time! 🎵</h2>
+            </div>
+
+            <div class="new-activity-prompt">
+                Which word rhymes with <span style="color: #FFD700; font-size: 2.5rem; font-weight: 700;" id="targetRhymeWord">cat</span>?
+            </div>
+
+            <div class="rhymes-target-card">
+                <div class="rhymes-target-word" id="rhymeWord">CAT</div>
+                <div style="font-size: 4rem; text-align: center; margin-top: 1rem; filter: drop-shadow(0 6px 15px rgba(0, 0, 0, 0.2));" id="rhymeEmoji">🐱</div>
+            </div>
+
+            <div class="rhymes-word-options" id="rhymeOptions">
+                <!-- Options generated by JS -->
+            </div>
+
+            <div class="rhyme-score">
+                <span id="rhymeScore">⭐ Score: 0</span>
+            </div>
+        </div>
+
+        <!-- Phonics Activity -->
+        <div class="screen" id="phonicsScreen">
+            <div class="activity-header">
+                <button class="back-btn" id="backFromPhonics">← Back</button>
+                <h2 class="activity-title">Blend Sounds! 📖</h2>
+            </div>
+
+            <div class="phonics-book-container">
+                <div class="phonics-book">
+                    <div class="phonics-book-page">
+                        <div class="new-activity-prompt">Blend these sounds:</div>
+                        <div class="phonics-sound-parts" id="soundParts">
+                            <!-- Sound tiles generated by JS -->
+                        </div>
+                        <div class="phonics-blended-word" id="blendedWord">CAT</div>
+                        <p class="new-activity-prompt">Which picture matches the word?</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="phonics-new-options" id="phonicsOptions">
+                <!-- Options generated by JS -->
+            </div>
+
+            <div class="phonics-score">
+                <span id="phonicsScore">⭐ Score: 0</span>
+            </div>
+        </div>
+
+        <!-- Logic Activity -->
+        <div class="screen" id="logicScreen">
+            <div class="activity-header">
+                <button class="back-btn" id="backFromLogic">← Back</button>
+                <h2 class="activity-title">Pattern Detective! 🧩</h2>
+            </div>
+
+            <div class="new-activity-prompt">What comes next in the pattern?</div>
+
+            <div class="logic-pattern-display">
+                <div class="logic-pattern-sequence" id="patternDisplay">
+                    <!-- Pattern items generated by JS -->
+                </div>
+            </div>
+
+            <div class="new-answer-grid" id="patternOptions">
+                <!-- Options generated by JS -->
+            </div>
+
+            <div class="logic-score">
+                <span id="logicScore">⭐ Score: 0</span>
+            </div>
+        </div>
+
+        <!-- Money Activity -->
+        <div class="screen" id="moneyScreen">
+            <div class="activity-header">
+                <button class="back-btn" id="backFromMoney">← Back</button>
+                <h2 class="activity-title">Count Coins! 💰</h2>
+            </div>
+
+            <div class="new-activity-prompt">How much money is this?</div>
+
+            <div class="money-coins-display" id="coinsToCount">
+                <!-- Coins generated by JS -->
+            </div>
+
+            <div class="new-answer-grid" id="moneyAnswerOptions">
+                <!-- Options generated by JS -->
+            </div>
+
+            <div class="activity-score">
+                <span id="moneyScore">⭐ Score: 0</span>
+            </div>
+        </div>
+
+        <!-- Time Activity -->
+        <div class="screen" id="timeScreen">
+            <div class="activity-header">
+                <button class="back-btn" id="backFromTime">← Back</button>
+                <h2 class="activity-title">Tell Time! 🕐</h2>
+            </div>
+
+            <div class="new-activity-prompt">What time is it?</div>
+
+            <div class="time-clock-container">
+                <div class="time-clock" id="analogClock">
+                    <!-- Number markers 1-12 -->
+                    <div class="clock-number" style="top:8%; left:50%; transform:translateX(-50%);">12</div>
+                    <div class="clock-number" style="top:17%; right:14%;">1</div>
+                    <div class="clock-number" style="top:38%; right:6%;">2</div>
+                    <div class="clock-number" style="top:58%; right:6%;">3</div>
+                    <div class="clock-number" style="top:78%; right:14%;">4</div>
+                    <div class="clock-number" style="bottom:8%; right:28%;">5</div>
+                    <div class="clock-number" style="bottom:5%; left:50%; transform:translateX(-50%);">6</div>
+                    <div class="clock-number" style="bottom:8%; left:28%;">7</div>
+                    <div class="clock-number" style="bottom:18%; left:6%;">8</div>
+                    <div class="clock-number" style="top:58%; left:6%;">9</div>
+                    <div class="clock-number" style="top:38%; left:6%;">10</div>
+                    <div class="clock-number" style="top:17%; left:14%;">11</div>
+                    <!-- Clock hands -->
+                    <div class="time-clock-hand time-hour-hand" id="hourHand"></div>
+                    <div class="time-clock-hand time-minute-hand" id="minuteHand"></div>
+                    <!-- Center dot -->
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 20px; height: 20px; background: #0072ff; border-radius: 50%; z-index: 10;"></div>
+                </div>
+            </div>
+
+            <div class="new-answer-grid" id="timeOptions">
+                <!-- Options generated by JS -->
+            </div>
+
+            <div class="time-score">
+                <span id="timeScore">⭐ Score: 0</span>
+            </div>
+        </div>
+
+        <!-- Memory Game Activity -->
+        <div class="screen" id="memoryScreen">
+            <div class="activity-header">
+                <button class="back-btn" id="backFromMemory">← Back</button>
+                <h2 class="activity-title">Memory Match! 🧠</h2>
+            </div>
+
+            <div class="memory-board" id="memoryBoard"></div>
+
+            <div class="memory-stats">
+                <span id="memoryMoves">Moves: 0</span>
+                <span id="memoryMatches">Matches: 0/6</span>
+            </div>
+        </div>
+
+        <!-- Dashboard Screen -->
+        <div class="screen" id="dashboardScreen">
+            <div class="activity-header">
+                <button class="back-btn" id="backFromDashboard">← Back</button>
+                <h2 class="activity-title">Your Progress 📊</h2>
+            </div>
+
+            <div class="dashboard-content">
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalActivities">0</div>
+                        <div class="stat-label">Activities Completed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalStars">0</div>
+                        <div class="stat-label">Stars Earned</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="bestScore">0</div>
+                        <div class="stat-label">Best Score</div>
+                    </div>
+                </div>
+
+                <div class="activity-progress" id="activityProgress">
+                    <h3>Activity Breakdown</h3>
+                    <div id="progressList"></div>
+                </div>
+
+                <div class="recent-sessions" id="recentSessions">
+                    <h3>Recent Learning</h3>
+                    <div id="sessionsList"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Modal -->
+        <div class="modal" id="settingsModal">
+            <div class="modal-content">
+                <h2>Settings ⚙️</h2>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="soundToggle" checked>
+                        Sound Effects
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="voiceToggle" checked>
+                        Buddy's Voice
+                    </label>
+                </div>
+                <button class="action-btn" id="viewDashboard">📊 View Progress</button>
+                <button class="close-btn" id="logoutBtn">🚪 Log Out</button>
+                <button class="close-btn" id="closeSettings">Close</button>
+            </div>
+        </div>
+
+        <!-- Celebration Overlay -->
+        <div class="celebration-overlay" id="celebrationOverlay">
+            <div class="celebration-content">
+                <h2>🎉 Amazing Job! 🎉</h2>
+                <p id="celebrationMessage">You did it!</p>
+                <button class="continue-btn" id="continueBtn">Continue!</button>
+            </div>
+            <div class="confetti" id="confetti"></div>
+        </div>
+    </div>
+
+    <!-- Login/Signup Modal -->
+    <div class="auth-modal" id="authModal">
+        <div class="auth-modal-content">
+            <button class="modal-close-btn" id="closeAuthModal">✕</button>
+            <h2 class="auth-title">Welcome to Buddy's Academy! 🐻</h2>
+            
+            <div class="auth-form" id="loginForm">
+                <h3>Sign In</h3>
+                <input type="email" id="loginEmail" placeholder="Email" class="auth-input">
+                <input type="password" id="loginPassword" placeholder="Password" class="auth-input">
+                <button class="auth-btn" id="loginBtn">Sign In</button>
+                <p class="auth-switch">Don't have an account? <span id="showSignup">Sign Up</span></p>
+            </div>
+            
+            <div class="auth-form hidden" id="signupForm">
+                <h3>Create Account</h3>
+                <input type="text" id="signupName" placeholder="Child's Name" class="auth-input">
+                <input type="number" id="signupAge" placeholder="Age" class="auth-input" min="4" max="7">
+                <input type="email" id="signupEmail" placeholder="Parent's Email" class="auth-input">
+                <input type="password" id="signupPassword" placeholder="Password (min 6 characters)" class="auth-input">
+                <button class="auth-btn" id="signupBtn">Create Account</button>
+                <p class="auth-switch">Already have an account? <span id="showLogin">Sign In</span></p>
+            </div>
+            
+            <div class="auth-error" id="authError"></div>
+        </div>
+    </div>
+
+    <!-- Activity Tracker Screen -->
+    <div class="screen" id="activityTrackerScreen">
+        <div class="activity-header">
+            <button class="back-btn" id="backFromTracker">← Back</button>
+            <h2 class="activity-title">My Daily Tasks 📅</h2>
+            <button class="parent-btn" id="parentModeBtn">👤</button>
+        </div>
+
+        <!-- Current Reward Progress -->
+        <div class="reward-progress-card" id="rewardProgressCard">
+            <div class="reward-info">
+                <div class="reward-icon" id="currentRewardIcon">🎁</div>
+                <div class="reward-details">
+                    <h3 id="currentRewardTitle">Working towards a reward!</h3>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="rewardProgressBar"></div>
+                    </div>
+                    <p class="progress-text" id="rewardProgressText">0 / 10 tasks complete</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Week Navigation -->
+        <div class="week-navigation">
+            <button class="week-nav-btn" id="prevWeek">◀</button>
+            <h3 class="week-title" id="weekTitle">This Week</h3>
+            <button class="week-nav-btn" id="nextWeek">▶</button>
+        </div>
+
+        <!-- Calendar View -->
+        <div class="calendar-container">
+            <div class="calendar-days">
+                <div class="calendar-day-header">Sun</div>
+                <div class="calendar-day-header">Mon</div>
+                <div class="calendar-day-header">Tue</div>
+                <div class="calendar-day-header">Wed</div>
+                <div class="calendar-day-header">Thu</div>
+                <div class="calendar-day-header">Fri</div>
+                <div class="calendar-day-header">Sat</div>
+            </div>
+            <div class="calendar-grid" id="calendarGrid">
+                <!-- Generated by JS -->
+            </div>
+        </div>
+
+        <!-- Today's Activities -->
+        <div class="todays-activities">
+            <h3>Today's Tasks</h3>
+            <div class="activity-list" id="activityList">
+                <!-- Generated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Parent Mode Modal -->
+    <div class="modal" id="parentModeModal">
+        <div class="modal-content parent-modal-content">
+            <h2>Parent Mode 👨‍👩‍👧</h2>
+            
+            <!-- PIN Entry -->
+            <div class="pin-entry" id="pinEntry">
+                <p>Enter Parent PIN:</p>
+                <input type="password" id="parentPin" placeholder="1234" class="auth-input" maxlength="4">
+                <button class="auth-btn" id="verifyPin">Enter</button>
+                <p class="pin-hint">Default PIN: 1234 (change in app.js)</p>
+            </div>
+
+            <!-- Parent Dashboard -->
+            <div class="parent-dashboard hidden" id="parentDashboard">
+                <div class="dashboard-tabs">
+                    <button class="tab-btn active" data-tab="activities">Activities</button>
+                    <button class="tab-btn" data-tab="rewards">Rewards</button>
+                    <button class="tab-btn" data-tab="history">History</button>
+                </div>
+
+                <!-- Activities Tab -->
+                <div class="tab-content active" id="activitiesTab">
+                    <button class="create-btn" id="createActivityBtn">+ Create Task</button>
+                    <div class="activities-manager" id="activitiesManager">
+                        <!-- Generated by JS -->
+                    </div>
+                </div>
+
+                <!-- Rewards Tab -->
+                <div class="tab-content" id="rewardsTab">
+                    <button class="create-btn" id="createRewardBtn">+ Create Reward</button>
+                    <div class="rewards-manager" id="rewardsManager">
+                        <!-- Generated by JS -->
+                    </div>
+                </div>
+
+                <!-- History Tab -->
+                <div class="tab-content" id="historyTab">
+                    <div class="history-stats" id="historyStats">
+                        <!-- Generated by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <button class="close-btn" id="closeParentMode">Close</button>
+        </div>
+    </div>
+
+    <!-- Create Activity Modal -->
+    <div class="modal" id="createActivityModal">
+        <div class="modal-content">
+            <h2>Create New Task 📝</h2>
+            <input type="text" id="activityTitle" placeholder="Task name" class="auth-input">
+            <textarea id="activityDescription" placeholder="Description (optional)" class="auth-input" rows="3"></textarea>
+            
+            <label>Task Type:</label>
+            <select id="activityType" class="auth-input">
+                <option value="learning">📚 Learning</option>
+                <option value="chore">🧹 Chore</option>
+                <option value="behavior">⭐ Good Behavior</option>
+                <option value="other">📝 Other</option>
+            </select>
+
+            <label>Icon:</label>
+            <div class="icon-picker">
+                <button class="icon-option" data-icon="📚">📚</button>
+                <button class="icon-option" data-icon="✏️">✏️</button>
+                <button class="icon-option" data-icon="🧹">🧹</button>
+                <button class="icon-option" data-icon="🛏️">🛏️</button>
+                <button class="icon-option" data-icon="🦷">🦷</button>
+                <button class="icon-option" data-icon="🍎">🍎</button>
+                <button class="icon-option" data-icon="⭐">⭐</button>
+                <button class="icon-option" data-icon="💪">💪</button>
+            </div>
+            <input type="hidden" id="selectedIcon" value="📝">
+
+            <label>Points: <span id="pointsValue">1</span></label>
+            <input type="range" id="activityPoints" min="1" max="5" value="1" class="points-slider">
+
+            <label>
+                <input type="checkbox" id="activityRecurring" checked> Repeats daily
+            </label>
+
+            <button class="auth-btn" id="saveActivityBtn">Create Task</button>
+            <button class="close-btn" id="cancelActivityBtn">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Create Reward Modal -->
+    <div class="modal" id="createRewardModal">
+        <div class="modal-content">
+            <h2>Create New Reward 🎁</h2>
+            <input type="text" id="rewardTitle" placeholder="Reward name (e.g., French Fries)" class="auth-input">
+            <textarea id="rewardDescription" placeholder="Description (optional)" class="auth-input" rows="3"></textarea>
+            
+            <label>Reward Type:</label>
+            <select id="rewardType" class="auth-input">
+                <option value="food">🍟 Food/Treat</option>
+                <option value="toy">🎁 Toy/Prize</option>
+                <option value="activity">🎮 Activity/Outing</option>
+                <option value="screen_time">📺 Screen Time</option>
+                <option value="other">⭐ Other</option>
+            </select>
+
+            <label>Icon:</label>
+            <div class="icon-picker">
+                <button class="icon-option" data-icon="🍟">🍟</button>
+                <button class="icon-option" data-icon="🍕">🍕</button>
+                <button class="icon-option" data-icon="🍦">🍦</button>
+                <button class="icon-option" data-icon="🎁">🎁</button>
+                <button class="icon-option" data-icon="🛴">🛴</button>
+                <button class="icon-option" data-icon="🎮">🎮</button>
+                <button class="icon-option" data-icon="🎬">🎬</button>
+                <button class="icon-option" data-icon="🎨">🎨</button>
+            </div>
+            <input type="hidden" id="selectedRewardIcon" value="🎁">
+
+            <label>Tasks Required: <span id="tasksRequiredValue">10</span></label>
+            <input type="range" id="rewardPoints" min="3" max="30" value="10" class="points-slider">
+
+            <button class="auth-btn" id="saveRewardBtn">Create Reward</button>
+            <button class="close-btn" id="cancelRewardBtn">Cancel</button>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+    <script src="GLTFLoader.js?v=2"></script>
+    <script src="buddy3d-v2.js"></script>
+    <script src="voice.js"></script>
+    <script src="app.js"></script>
+    <script src="auth-simple.js"></script>
+</body>
+</html>
